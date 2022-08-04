@@ -1,8 +1,8 @@
 <template>
-  <div></div>
+  <div>footer</div>
 </template>
-<script></script>
+<script>
 export default {
-  name:"NavFooter"
+  name: 'NavFooter'
 }
 </script>
