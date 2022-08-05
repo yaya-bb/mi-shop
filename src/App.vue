@@ -6,8 +6,12 @@
 </template>
 
 <script>
+import storage from './storage/index.js'
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    storage.clear('a')
+  }
 }
 </script>
 
