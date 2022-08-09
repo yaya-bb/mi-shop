@@ -40,6 +40,6 @@ export default {
     } else {
       delete val[key]
     }
-    this.setItem(val)
+    window.sessionStorage.setItem(Storage_Key, JSON.stringify(val))
   }
 }
