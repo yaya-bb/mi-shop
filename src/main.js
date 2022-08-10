@@ -5,6 +5,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import App from './App'
 import router from './router'
+import 'styles/iconfont.css'
 
 // 发请求需要设置基础值，baseURL根据前端的跨域方式做调整
 // CORS跨域、JSONP跨域用http:://www....;接口代理直接写/api

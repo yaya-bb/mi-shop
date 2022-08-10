@@ -1,0 +1,23 @@
+{
+  "id": "3552598",
+  "name": "mimall",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "629357",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "3456451",
+      "name": "购物车-填充",
+      "font_class": "gouwuche-tianchong",
+      "unicode": "e70c",
+      "unicode_decimal": 59148
+    }
+  ]
+}

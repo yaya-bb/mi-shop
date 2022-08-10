@@ -1,0 +1,20 @@
+// mixin用来更高效的实现组件内容的复用
+// flex布局复用
+// 参数：hov水平方向，col垂直方向
+// 括号内为默认值
+@mixin flex($hov:space-between,$col:center) {
+  display: flex;
+  /* 元素之间有间隔而且间隔距离都一样 */
+  justify-content: $hov;
+  /* 该属性用于控制子元素在侧轴（默认为y轴）上的排列方式，在子元素为单项时使用 */
+  align-items: $col;
+}
+// 参数:$w宽，$h高
+@mixin bgImg($w:0,$h:0,$size:contain) {
+  display: inline-block;
+  width: $w;
+  height: $h;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: $size;
+  }
