@@ -9,6 +9,8 @@ import 'styles/iconfont.css'
 
 // 发请求需要设置基础值，baseURL根据前端的跨域方式做调整
 // CORS跨域、JSONP跨域用http:://www....;接口代理直接写/api
+// 开发阶段用mock
+// axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5dc7afee2b69d9223b633cbb/mimall'
 axios.defaults.baseURL = '/api'
 // 超出时间一定要进行设置
 axios.defaults.timeout = 8000

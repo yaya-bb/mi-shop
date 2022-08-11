@@ -10,9 +10,11 @@
             <a href="javascript:;">协议规则</a>
           </div>
           <div class="topbar-user">
-            <a href="javascript:;">登录</a>
-            <a href="javascript:;">注册</a>
-            <a href="javascript:;" class="my-cart"><span class="icon-cart iconfont">&#xe70c;</span>购物车</a>
+            <a href="javascript:;" v-if="username">{{username}}</a>
+            <a href="javascript:;" v-if="!username" @click="login">登录</a>
+            <a href="javascript:;" v-if="username">我的订单</a>
+            <!-- 绑定一个事件进行跳转 -->
+            <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart iconfont">&#xe70c;</span>购物车</a>
           </div>
         </div>
       </div>
@@ -41,10 +43,20 @@
                     <!-- _blank打开一个新窗口 -->
                     <a href="" target="_blank">
                       <div class="pro-img">
-                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d7a15df55e98e4163390096ed05b1ef5.png?thumb=1&w=200&h=138&f=webp&q=90">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b01bb7ee0f8c9865c11eeb2c483015e2.png?thumb=1&w=200&h=138&f=webp&q=90">
                       </div>
-                      <div class="pro-name">小米CC9</div>
-                      <div class="pro-price">1799元</div>
+                      <div class="pro-name">小米12S pro</div>
+                      <div class="pro-price">4699元</div>
+                    </a>
+                  </li>
+                  <li class="product">
+                    <!-- _blank打开一个新窗口 -->
+                    <a href="" target="_blank">
+                      <div class="pro-img">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/88ae9b85c5f8fbdae2ea98d58a045e1e.png?thumb=1&w=200&h=138&f=webp&q=90">
+                      </div>
+                      <div class="pro-name">小米Civi 1S</div>
+                      <div class="pro-price">2299元</div>
                     </a>
                   </li>
                   <li class="product">
@@ -61,42 +73,176 @@
                     <!-- _blank打开一个新窗口 -->
                     <a href="" target="_blank">
                       <div class="pro-img">
-                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d7a15df55e98e4163390096ed05b1ef5.png?thumb=1&w=200&h=138&f=webp&q=90">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b01bb7ee0f8c9865c11eeb2c483015e2.png?thumb=1&w=200&h=138&f=webp&q=90">
                       </div>
-                      <div class="pro-name">小米CC9</div>
-                      <div class="pro-price">1799元</div>
+                      <div class="pro-name">小米12S pro</div>
+                      <div class="pro-price">4699元</div>
                     </a>
                   </li>
                   <li class="product">
                     <!-- _blank打开一个新窗口 -->
                     <a href="" target="_blank">
                       <div class="pro-img">
-                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d7a15df55e98e4163390096ed05b1ef5.png?thumb=1&w=200&h=138&f=webp&q=90">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/88ae9b85c5f8fbdae2ea98d58a045e1e.png?thumb=1&w=200&h=138&f=webp&q=90">
                       </div>
-                      <div class="pro-name">小米CC9</div>
-                      <div class="pro-price">1799元</div>
+                      <div class="pro-name">小米Civi 1S</div>
+                      <div class="pro-price">2299元</div>
+                    </a>
+                  </li>
+                </ul>
+                <!-- 用接口只需要一个li进行循环遍历 -->
+                <!-- v-for需要+key，复用率更高些 -->
+                <!-- <li class="product"
+                    v-for="(item,index) in phoneList"
+                    :key="index">
+                    下面target的属性为打开一个新窗口
+                    通过v-bind绑定数据可简写为：
+                    一旦使用字符串则使用'',因为写的任何代码都是变量
+                    ''里面拼接的是跳转的地址
+                    <a v-bind:href="'/#/product/'+item.id" target="_blank">
+                      <div class="pro-img">
+                        动态渲染图片
+                        <img :src="item.mainImg" :alt="item.subtitle">
+                      </div>
+                      <div class="pro-name">{{item.name}}</div>
+                      <div class="pro-price">{{item.price | currency}}</div>
+                    </a>
+                </li> -->
+              </div>
+            </div>
+            <div class="item-menu">
+              <span>RedMi红米</span>
+              <div class="children">
+                <ul>
+                  <li class="product">
+                    <!-- _blank打开一个新窗口 -->
+                    <a href="" target="_blank">
+                      <div class="pro-img">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/30969671b2829cbc625f018c6c998708.png?thumb=1&w=200&h=138&f=webp&q=90">
+                      </div>
+                      <div class="pro-name">Remi Node 11SE</div>
+                      <div class="pro-price">999元</div>
                     </a>
                   </li>
                   <li class="product">
                     <!-- _blank打开一个新窗口 -->
                     <a href="" target="_blank">
                       <div class="pro-img">
-                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d7a15df55e98e4163390096ed05b1ef5.png?thumb=1&w=200&h=138&f=webp&q=90">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ae5b5a8e24272dd4cdd77bf6d26954b6.png?thumb=1&w=200&h=138&f=webp&q=90">
                       </div>
-                      <div class="pro-name">小米CC9</div>
-                      <div class="pro-price">1799元</div>
+                      <div class="pro-name">Remi 10A</div>
+                      <div class="pro-price">699元</div>
+                    </a>
+                  </li>
+                  <li class="product">
+                    <!-- _blank打开一个新窗口 -->
+                    <a href="" target="_blank">
+                      <div class="pro-img">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/418f4cb7536265cd99bdf8b2e88d1f84.png?thumb=1&w=200&h=138&f=webp&q=90">
+                      </div>
+                      <div class="pro-name">Redmi K50 Pro</div>
+                      <div class="pro-price">2999元</div>
+                    </a>
+                  </li>
+                  <li class="product">
+                    <!-- _blank打开一个新窗口 -->
+                    <a href="" target="_blank">
+                      <div class="pro-img">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/30969671b2829cbc625f018c6c998708.png?thumb=1&w=200&h=138&f=webp&q=90">
+                      </div>
+                      <div class="pro-name">Remi Node 11SE</div>
+                      <div class="pro-price">999元</div>
+                    </a>
+                  </li>
+                  <li class="product">
+                    <!-- _blank打开一个新窗口 -->
+                    <a href="" target="_blank">
+                      <div class="pro-img">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ae5b5a8e24272dd4cdd77bf6d26954b6.png?thumb=1&w=200&h=138&f=webp&q=90">
+                      </div>
+                      <div class="pro-name">Remi 10A</div>
+                      <div class="pro-price">699元</div>
+                    </a>
+                  </li>
+                  <li class="product">
+                    <!-- _blank打开一个新窗口 -->
+                    <a href="" target="_blank">
+                      <div class="pro-img">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/418f4cb7536265cd99bdf8b2e88d1f84.png?thumb=1&w=200&h=138&f=webp&q=90">
+                      </div>
+                      <div class="pro-name">Redmi K50 Pro</div>
+                      <div class="pro-price">2999元</div>
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
             <div class="item-menu">
-              <span>RedMi红米</span>
-              <div class="children"></div>
-            </div>
-            <div class="item-menu">
               <span>电视</span>
-              <div class="children"></div>
+              <div class="children">
+                <ul>
+                  <li class="product">
+                    <!-- _blank打开一个新窗口 -->
+                    <a href="" target="_blank">
+                      <div class="pro-img">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6511d77270e94146c0b1f96b66d8cc58.png?thumb=1&w=200&h=138&f=webp&q=90">
+                      </div>
+                      <div class="pro-name">Redmi智能电视X65 2022</div>
+                      <div class="pro-price">2999元</div>
+                    </a>
+                  </li>
+                  <li class="product">
+                    <!-- _blank打开一个新窗口 -->
+                    <a href="" target="_blank">
+                      <div class="pro-img">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8871821795310769c1d3896c99b12381.png?thumb=1&w=200&h=138&f=webp&q=90">
+                      </div>
+                      <div class="pro-name">小米电视6 65'' OLED</div>
+                      <div class="pro-price">6699元</div>
+                    </a>
+                  </li>
+                  <li class="product">
+                    <!-- _blank打开一个新窗口 -->
+                    <a href="" target="_blank">
+                      <div class="pro-img">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6511d77270e94146c0b1f96b66d8cc58.png?thumb=1&w=200&h=138&f=webp&q=90">
+                      </div>
+                      <div class="pro-name">Redmi智能电视X65 2022</div>
+                      <div class="pro-price">2999元</div>
+                    </a>
+                  </li>
+                  <li class="product">
+                    <!-- _blank打开一个新窗口 -->
+                    <a href="" target="_blank">
+                      <div class="pro-img">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8871821795310769c1d3896c99b12381.png?thumb=1&w=200&h=138&f=webp&q=90">
+                      </div>
+                      <div class="pro-name">小米电视6 65'' OLED</div>
+                      <div class="pro-price">6699元</div>
+                    </a>
+                  </li>
+                  <li class="product">
+                    <!-- _blank打开一个新窗口 -->
+                    <a href="" target="_blank">
+                      <div class="pro-img">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6511d77270e94146c0b1f96b66d8cc58.png?thumb=1&w=200&h=138&f=webp&q=90">
+                      </div>
+                      <div class="pro-name">Redmi智能电视X65 2022</div>
+                      <div class="pro-price">2999元</div>
+                    </a>
+                  </li>
+                  <li class="product">
+                    <!-- _blank打开一个新窗口 -->
+                    <a href="" target="_blank">
+                      <div class="pro-img">
+                        <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/8871821795310769c1d3896c99b12381.png?thumb=1&w=200&h=138&f=webp&q=90">
+                      </div>
+                      <div class="pro-name">小米电视6 65'' OLED</div>
+                      <div class="pro-price">6699元</div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="header-search">
@@ -113,7 +259,48 @@
 </template>
 <script>
 export default {
-  name: 'NavHeader'
+  name: 'NavHeader',
+  data() {
+    return {
+      username: '',
+      phoneList: []
+    }
+  },
+  // 定义一个过滤器金额格式化(日期格式化也会用到过滤器)
+  // filters: {
+  //   currency(val) {
+  //     // val为空
+  //     if (!val) return '0.00'
+  //     return '￥' + val.toFixed(2) + '元'
+  //   }
+  // },
+  mounted() {
+    this.getProductList()
+  },
+  methods: {
+    // 跳转到登录页面
+    login() {
+      this.$router.push('/login')
+    },
+    // 获得产品的列表
+    getProductList() {
+      this.axios.get('/products', {
+        params: {
+          categoryId: '100012'
+        }
+      }).then((res) => {
+      // 判断长度，截取6个
+        if (res.list.length >= 6) {
+          this.phoneList = res.list.slice(0, 6)
+        }
+      })
+    },
+    goToCart() {
+      // 取参数如何取呢:router.parent取参数
+      // 跳转路由使用this.$router.push
+      this.$router.push('/cart')
+    }
+  }
 }
 </script>
 <style lang = "scss">
@@ -180,6 +367,7 @@ export default {
             }
             &:hover:before{
               margin-left: -55px;
+              /* 动画 */
               transition: margin .2s;
             }
           }
