@@ -4,39 +4,66 @@
       <div class="nav-menu">
         <ul class="menu-wrap">
           <li class="menu-item">
-            <a href="javascript:;">手机</a>
+            <a href="javascript:;">
+              手机
+              <span class="iconfont">&#xe665;</span>
+            </a>
             <div class="children"></div>
           </li>
           <li class="menu-item">
-            <a href="javascript:;">电视</a>
+            <a href="javascript:;">
+              电视
+              <span class="iconfont">&#xe665;</span>
+            </a>
             <div class="children"></div>
           </li>
           <li class="menu-item">
-            <a href="javascript:;">笔记本 平板</a>
+            <a href="javascript:;">
+              笔记本 平板
+              <span class="iconfont">&#xe665;</span>
+              </a>
             <div class="children"></div>
           </li>
           <li class="menu-item">
-            <a href="javascript:;">出行 穿戴</a>
+            <a href="javascript:;">
+              出行 穿戴
+              <span class="iconfont">&#xe665;</span>
+            </a>
             <div class="children"></div>
           </li>
           <li class="menu-item">
-            <a href="javascript:;">家电</a>
+            <a href="javascript:;">
+              家电
+              <span class="iconfont">&#xe665;</span>
+            </a>
             <div class="children"></div>
           </li>
           <li class="menu-item">
-            <a href="javascript:;">智能 路由器</a>
+            <a href="javascript:;">
+              智能 路由器
+              <span class="iconfont">&#xe665;</span>
+            </a>
             <div class="children"></div>
           </li>
           <li class="menu-item">
-            <a href="javascript:;">电源 配件</a>
+            <a href="javascript:;">
+              电源 配件
+              <span class="iconfont">&#xe665;</span>
+              </a>
             <div class="children"></div>
           </li>
           <li class="menu-item">
-            <a href="javascript:;">健康 儿童</a>
+            <a href="javascript:;">
+              健康 儿童
+              <span class="iconfont">&#xe665;</span>
+              </a>
             <div class="children"></div>
           </li>
           <li class="menu-item">
-            <a href="javascript:;">生活 箱包</a>
+            <a href="javascript:;">
+              生活 箱包
+              <span class="iconfont">&#xe665;</span>
+              </a>
             <div class="children"></div>
           </li>
         </ul>
@@ -116,23 +143,41 @@ export default {
 }
 </script>
 <style lang="scss">
+  @import './../assets/scss/config.scss';
+  @import './../assets/scss/mixin.scss';
   .index {
-    .swiper-box {
+    .container {
+      position: relative;
       .nav-menu {
         position: absolute;
         width: 264px;
         height: 451px;
-        z-index: 10;
-        padding: 26px 0;
-        background-color: #55585A;
+        z-index: 9;
+        padding: 5px 0;
+        background-color: #55585a7a;
         box-sizing: border-box;
         .menu-wrap {
-          height: 50px;
-          line-height: 50px;
-          a {
-            font-size: 16px;
-            color: #fff;
-            padding-left: 30px;
+          .menu-item {
+            height: 50px;
+            line-height: 50px;
+            a {
+              position: relative;
+              display: block;
+              font-size: 16px;
+              color: #fff;
+              padding-left: 30px;
+              &:after {
+                content: ' ';
+                @include bgImg(10px,15px);
+              }
+              .iconfont {
+                position: absolute;
+                right: 32px;
+              }
+            }
+            &:hover {
+              background-color:$colorA;;
+      }
           }
         }
       }
@@ -142,6 +187,16 @@ export default {
           width: 100%;
           height: 100%;
         }
+      }
+    }
+    .swiper-container {
+      height: 451px;
+      .swiper-button-prev {
+        left: 274px;
+      }
+      img {
+        width: 100%;
+        height: 100%;
       }
     }
   }

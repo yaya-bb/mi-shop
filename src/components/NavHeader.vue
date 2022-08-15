@@ -363,7 +363,6 @@ export default {
               content: ' ';
               display: inline-block;
               @include bgImg(55px,55px,55px);
-              background-image: url("/public/imgs/mi-home.png");
             }
             &:hover:before{
               margin-left: -55px;
@@ -397,7 +396,7 @@ export default {
             }
             .children {
               position: absolute;
-              top: 142px;
+              top: 90px;
               left: 0;
               width: 1226px;
               /* 默认高度为0 */

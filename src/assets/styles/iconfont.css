@@ -3,7 +3,7 @@
   src: 
        url('iconfont/iconfont.woff2') format('woff2'),
        url('iconfont/iconfont.woff') format('woff'),
-       url('iconfont/iconfont.ttf?t=1660196703453') format('truetype');
+       url('iconfont/iconfont.ttf?t=1660541767513') format('truetype');
 }
 
 .iconfont {
@@ -12,6 +12,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow-right:before {
+  content: "\e665";
 }
 
 .icon-15tianwuliyoutuihuo:before {
