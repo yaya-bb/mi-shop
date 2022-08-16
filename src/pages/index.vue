@@ -8,7 +8,16 @@
               手机
               <span class="iconfont">&#xe665;</span>
             </a>
-            <div class="children"></div>
+            <div class="children">
+              <ul v-for="(item, i) in menuList" :key="i">
+                <li v-for="(sub, j) in item" :key="j">
+                  <a v-bind:href=" sub ? '/#/product/' +  sub.id : ''">
+                    <img v-bind:src=" sub ? sub.img : 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/52ef2b0a20fdb016f11d717e63f460db.png?thumb=1&w=33&h=33&f=webp&q=90'" alt="">
+                    {{sub ? sub.name : 'Xiaomi MIX Fold2'}}
+                  </a>
+                </li>
+              </ul>
+            </div>
           </li>
           <li class="menu-item">
             <a href="javascript:;">
@@ -137,6 +146,140 @@ export default {
           id: ' 48',
           img: ' https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/4cfa4e9a0f10a79ed068f26adf846bfa.jpg?thumb=1&w=1022&h=383&f=webp&q=90'
         }
+      ],
+      menuList: [
+        [
+          {
+            id: 30,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/52ef2b0a20fdb016f11d717e63f460db.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Xiaomi MIX Fold2'
+          },
+          {
+            id: 31,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d8aeccb0bad7f28a44aa89b2ddb51010.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Note 11T Pro+'
+          },
+          {
+            id: 32,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cd1f0b06757ab64cb320a9a545f616ef.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Redmi 10A'
+          },
+          {
+            id: 33,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ae8f6a46838f737d69290f12fd95de35.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Xiaomi 12'
+          }
+        ],
+        [
+          {
+            id: 34,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/52ef2b0a20fdb016f11d717e63f460db.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Xiaomi MIX Fold2'
+          },
+          {
+            id: 35,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d8aeccb0bad7f28a44aa89b2ddb51010.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Note 11T Pro+'
+          },
+          {
+            id: 36,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cd1f0b06757ab64cb320a9a545f616ef.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Redmi 10A'
+          },
+          {
+            id: 37,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ae8f6a46838f737d69290f12fd95de35.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Xiaomi 12'
+          }
+        ],
+        [
+          {
+            id: 38,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/52ef2b0a20fdb016f11d717e63f460db.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Xiaomi MIX Fold2'
+          },
+          {
+            id: 39,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d8aeccb0bad7f28a44aa89b2ddb51010.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Note 11T Pro+'
+          },
+          {
+            id: 40,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cd1f0b06757ab64cb320a9a545f616ef.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Redmi 10A'
+          },
+          {
+            id: 41,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ae8f6a46838f737d69290f12fd95de35.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Xiaomi 12'
+          }
+        ],
+        [
+          {
+            id: 42,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/52ef2b0a20fdb016f11d717e63f460db.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Xiaomi MIX Fold2'
+          },
+          {
+            id: 43,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d8aeccb0bad7f28a44aa89b2ddb51010.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Note 11T Pro+'
+          },
+          {
+            id: 44,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cd1f0b06757ab64cb320a9a545f616ef.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Redmi 10A'
+          },
+          {
+            id: 45,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ae8f6a46838f737d69290f12fd95de35.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Xiaomi 12'
+          }
+        ],
+        [
+          {
+            id: 46,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/52ef2b0a20fdb016f11d717e63f460db.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Xiaomi MIX Fold2'
+          },
+          {
+            id: 47,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d8aeccb0bad7f28a44aa89b2ddb51010.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Note 11T Pro+'
+          },
+          {
+            id: 48,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cd1f0b06757ab64cb320a9a545f616ef.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Redmi 10A'
+          },
+          {
+            id: 49,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ae8f6a46838f737d69290f12fd95de35.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Xiaomi 12'
+          }
+        ],
+        [
+          {
+            id: 50,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/52ef2b0a20fdb016f11d717e63f460db.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Xiaomi MIX Fold2'
+          },
+          {
+            id: 51,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/d8aeccb0bad7f28a44aa89b2ddb51010.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Note 11T Pro+'
+          },
+          {
+            id: 52,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/cd1f0b06757ab64cb320a9a545f616ef.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Redmi 10A'
+          },
+          {
+            id: 53,
+            img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/ae8f6a46838f737d69290f12fd95de35.png?thumb=1&w=33&h=33&f=webp&q=90',
+            name: 'Xiaomi 12'
+          }
+        ]
       ]
     }
   }
@@ -153,7 +296,7 @@ export default {
         width: 264px;
         height: 451px;
         z-index: 9;
-        padding: 5px 0;
+        padding: 3px 0;
         background-color: #55585a7a;
         box-sizing: border-box;
         .menu-wrap {
@@ -176,28 +319,59 @@ export default {
               }
             }
             &:hover {
-              background-color:$colorA;;
-      }
+              background-color:$colorA;
+              .children {
+                display: block;
+              }
+            }
+            .children {
+              // 默认不给看见
+              display: none;
+              width: 962px;
+              height: 451px;
+              background-color: $colorG;
+              position: absolute;
+              top: 0;
+              left: 264px;
+              border: 1px solid $colorH;
+              ul {
+                display: flex;
+                // 两边对齐
+                justify-content: space-between;
+                height: 75px;
+                li {
+                  height: 75px;
+                  // 文字居中
+                  line-height: 75px;
+                  flex: 1;
+                  padding-left: 23px;
+                }
+                a {
+                  color: $colorB;
+                  font-size: 14px;
+                }
+                img {
+                  width: 42px;
+                  height: 35px;
+                  // 文字和图片是居中的
+                  vertical-align: middle;
+                  margin-right: 15px;
+                }
+              }
+            }
           }
         }
       }
-      .swiper-container {
+      .swiper-box {
         height: 451px;
+        .swiper-button-prev {
+        left: 274px;
+        }
         img {
           width: 100%;
-          height: 100%;
+          height: 451px;
         }
-      }
     }
-    .swiper-container {
-      height: 451px;
-      .swiper-button-prev {
-        left: 274px;
-      }
-      img {
-        width: 100%;
-        height: 100%;
-      }
     }
   }
 </style>
