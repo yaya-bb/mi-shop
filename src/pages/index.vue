@@ -9,8 +9,12 @@
               <span class="iconfont">&#xe665;</span>
             </a>
             <div class="children">
-              <ul v-for="(item, i) in menuList" :key="i">
-                <li v-for="(sub, j) in item" :key="j">
+              <ul
+                v-for="(item, i) in menuList"
+                :key="i">
+                <li
+                  v-for="(sub, j) in item"
+                  :key="j">
                   <a v-bind:href=" sub ? '/#/product/' +  sub.id : ''">
                     <img v-bind:src=" sub ? sub.img : 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/52ef2b0a20fdb016f11d717e63f460db.png?thumb=1&w=33&h=33&f=webp&q=90'" alt="">
                     {{sub ? sub.name : 'Xiaomi MIX Fold2'}}
@@ -79,8 +83,10 @@
       </div>
       <div class="swiper-box">
         <swiper v-bind:options="swiperOption">
-          <swiper-slide v-for="(item,index) in slideList" v-bind:key="index">
-            <img v-bind:src="item.img">
+          <swiper-slide
+            v-for="(item,index) in slideList"
+            :key="index">
+            <img :src="item.img">
           </swiper-slide>
           <!-- Optional controls -->
           <div class="swiper-pagination"  slot="pagination"></div>
@@ -89,7 +95,10 @@
         </swiper>
       </div>
       <div class="ads-box">
-        <a :href="'/#/product/' + item.id" v-for="(item, index) in adsList" :key="index">
+        <a
+          :href="'/#/product/' + item.id"
+          v-for="(item, index) in adsList"
+          :key="index">
           <img :src="item.img" alt="">
         </a>
       </div>
@@ -99,7 +108,33 @@
           <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/33973edd8c6c8177f8431daf679e8eb5.jpg?thumb=1&w=1022&h=100&f=webp&q=90" alt="">
         </a>
       </div>
-      <div class="product-box"></div>
+      <!-- 商品内容区域 -->
+      <div class="product-box">
+        <h2>手机</h2>
+        <div class="wrapper">
+          <div class="banner-left">
+            <a href="/#/product/35">
+              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/fef86f3a976842446ec7c3f315cf253f.jpg?thumb=1&w=195&h=512&f=webp&q=90" alt="">
+            </a>
+          </div>
+          <div class="list-box">
+            <div class="list" v-for="(arr, k) in phoneList" :key="k">
+              <div class="item" v-for="(item, q) in arr" :key="q">
+                <span>新品</span>
+                <div class="item-img">
+                  <img src="" alt="">
+                </div>
+                <div class="item-info">
+                  <h3>Xiaomi MIX Fold 2</h3>
+                  <p>超轻薄折叠机身设计，小米自研微水滴形态转轴</p>
+                  <p>8999元</p>
+                </div>
+              </div>
+            </div>
+            <div class="list"></div>
+          </div>
+        </div>
+      </div>
     </div>
     <service-bar></service-bar>
   </div>
@@ -305,6 +340,10 @@ export default {
           id: 36,
           img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5668146e20fc025caa756a0f8a3c7da4.jpg?w=632&h=340'
         }
+      ],
+      phoneList: [
+        [1, 1, 1, 1],
+        [1, 1, 1, 1]
       ]
     }
   }
@@ -408,6 +447,33 @@ export default {
       }
       .banner {
         margin-bottom: 50px;
+      }
+      .product-box {
+        background-color: $colorJ;
+        // 上-右-下-左
+        padding: 30px 0 50px;
+        h2 {
+          font-size: $fontF;
+          height: 21px;
+          line-height: 21px;
+          color: $colorB;
+        }
+        .wrapper {
+          display: flex;
+          .banner-left {
+            margin-top: 14px;
+            margin-right: 16px;
+            img {
+              width: 224px;
+              height: 619px;
+            }
+          }
+          .list-box {
+            .list {
+              @include flex();
+            }
+          }
+        }
       }
     }
   }
