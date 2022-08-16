@@ -88,8 +88,17 @@
           <div class="swiper-button-next" slot="button-next"></div>
         </swiper>
       </div>
-      <div class="ads-box"></div>
-      <div class="banner"></div>
+      <div class="ads-box">
+        <a :href="'/#/product/' + item.id" v-for="(item, index) in adsList" :key="index">
+          <img :src="item.img" alt="">
+        </a>
+      </div>
+      <div class="banner">
+        <!-- 加：为动态绑定 -->
+        <a href="/#/product/30">
+          <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/33973edd8c6c8177f8431daf679e8eb5.jpg?thumb=1&w=1022&h=100&f=webp&q=90" alt="">
+        </a>
+      </div>
       <div class="product-box"></div>
     </div>
     <service-bar></service-bar>
@@ -115,10 +124,8 @@ export default {
         loop: true,
         effect: 'cube',
         cubeEffect: {
-          slideShadows: true,
-          shadow: true,
-          shadowOffset: 100,
-          shadowScale: 0.6
+          slideShadows: false,
+          shadow: false
         },
         navigation: {
           nextEl: '.swiper-button-next',
@@ -280,6 +287,24 @@ export default {
             name: 'Xiaomi 12'
           }
         ]
+      ],
+      adsList: [
+        {
+          id: 33,
+          img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/32a62196b9af47752c96e7a50c86417c.jpg?w=632&h=340'
+        },
+        {
+          id: 34,
+          img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5668146e20fc025caa756a0f8a3c7da4.jpg?w=632&h=340'
+        },
+        {
+          id: 35,
+          img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/28c13d0d11b38ec17fa5d83bc6ba5912.jpg?w=632&h=340'
+        },
+        {
+          id: 36,
+          img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5668146e20fc025caa756a0f8a3c7da4.jpg?w=632&h=340'
+        }
       ]
     }
   }
@@ -371,7 +396,19 @@ export default {
           width: 100%;
           height: 451px;
         }
-    }
+      }
+      .ads-box {
+        @include flex();
+        a {
+          margin-top: 25px;
+          margin-bottom: 31px;
+          width: 296px;
+          height: 167px;
+        }
+      }
+      .banner {
+        margin-bottom: 50px;
+      }
     }
   }
 </style>
