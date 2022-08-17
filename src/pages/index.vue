@@ -109,33 +109,46 @@
         </a>
       </div>
       <!-- 商品内容区域 -->
-      <div class="product-box">
-        <h2>手机</h2>
-        <div class="wrapper">
-          <div class="banner-left">
-            <a href="/#/product/35">
-              <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/fef86f3a976842446ec7c3f315cf253f.jpg?thumb=1&w=195&h=512&f=webp&q=90" alt="">
+    </div>
+    <div class="product-box">
+        <div class="container">
+          <h2>手机
+            <a href="" class="more">查看更多
+              <span class="iconfont">&#xe665;</span>
             </a>
-          </div>
-          <div class="list-box">
-            <div class="list" v-for="(arr, k) in phoneList" :key="k">
-              <div class="item" v-for="(item, q) in arr" :key="q">
-                <span>新品</span>
-                <div class="item-img">
-                  <img src="" alt="">
-                </div>
-                <div class="item-info">
-                  <h3>Xiaomi MIX Fold 2</h3>
-                  <p>超轻薄折叠机身设计，小米自研微水滴形态转轴</p>
-                  <p>8999元</p>
+          </h2>
+          <div class="wrapper">
+            <div class="banner-left">
+              <a href="/#/product/35">
+                <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/fef86f3a976842446ec7c3f315cf253f.jpg?thumb=1&w=195&h=512&f=webp&q=90" alt="">
+              </a>
+            </div>
+            <div class="list-box">
+              <div class="list" v-for="(arr, k) in phoneList" :key="k">
+                <div class="item" v-for="(item, q) in arr" :key="q">
+                  假设偶数为新品，用三元表达式判断
+                  <span :class="{'new-pro' : q % 2 == 0}">新品</span>
+                  <div class="item-img">
+                    <!-- <img :src="item.mainImage" alt=""> -->
+                    <img src="https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/a687e796bb4879cd0e93867177f800da.png?thumb=1&w=167&h=167&f=webp&q=90" alt="">
+                  </div>
+                  <div class="item-info">
+                    <h3>Xiaomi MIX Fold 2</h3>
+                    <!-- <h3>{{item.name}}</h3>
+                    <p>{{item.subtitle}}</p>
+                    <p class="price">{{item.price}}</p> -->
+                    <p>超轻薄折叠机身设计，小米自研微水滴形态转轴</p>
+                    <p class="price">8999元
+                      <span class="iconfont">&#xe70c;</span>
+                    </p>
+                  </div>
                 </div>
               </div>
+              <div class="list"></div>
             </div>
-            <div class="list"></div>
           </div>
         </div>
       </div>
-    </div>
     <service-bar></service-bar>
   </div>
 </template>
@@ -151,6 +164,14 @@ export default {
     swiper,
     swiperSlide
   },
+  // // 定义一个过滤器金额格式化(日期格式化也会用到过滤器)
+  // filters: {
+  //   currency(val) {
+  //     // val为空
+  //     if (!val) return '0.00'
+  //     return '￥' + val.toFixed(2) + '元'
+  //   }
+  // },
   data() {
     return {
       swiperOption: {
@@ -346,6 +367,30 @@ export default {
         [1, 1, 1, 1]
       ]
     }
+  },
+  // 使用接口实现
+  // 初始化商品
+  mounted() {
+    // 加载商品列表
+    this.init()
+  },
+  methods: {
+    init() {
+      // 加载商品列表,res用来接收结果
+      this.axios.get('/products', {
+        // get用params传参
+        params: {
+          categoryId: 100012,
+          // 限制个数
+          pageSize: 14
+        }
+      }).then((res) => {
+        res.list = res.list.slice(6, 14)
+        // slice不会改变原数组
+        // 生成二维数组(0,4)为第一个数组,(4,8)为第二个数组
+        this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)]
+      })
+    }
   }
 }
 </script>
@@ -448,29 +493,95 @@ export default {
       .banner {
         margin-bottom: 50px;
       }
-      .product-box {
-        background-color: $colorJ;
-        // 上-右-下-左
-        padding: 30px 0 50px;
-        h2 {
-          font-size: $fontF;
-          height: 21px;
-          line-height: 21px;
-          color: $colorB;
+    }
+    .product-box {
+      background-color: $colorJ;
+      // 上-右-下-左
+      padding: 30px 0 50px;
+      h2 {
+        font-size: $fontF;
+        height: 21px;
+        line-height: 21px;
+        color: $colorB;
+        margin-bottom: 20px;
+        .more {
+          position: absolute;
+          top: 0;
+          right: 0;
+          color: #424242;
+          font-size: 16px;
+          font-weight: normal;
         }
-        .wrapper {
-          display: flex;
-          .banner-left {
-            margin-top: 14px;
-            margin-right: 16px;
-            img {
-              width: 224px;
-              height: 619px;
-            }
+      }
+      .wrapper {
+        display: flex;
+        .banner-left {
+          margin-right: 16px;
+          img {
+            width: 224px;
+            height: 619px;
           }
-          .list-box {
-            .list {
-              @include flex();
+        }
+        .list-box {
+          .list {
+            @include flex();
+            width: 986px;
+            margin-bottom: 14px;
+            &:last-child {
+              margin-bottom: 0;
+            }
+            .item {
+              width: 236px;
+              height: 302px;
+              background-color: $colorG;
+              text-align: center;
+              span {
+                display: inline-block;
+                width: 67px;
+                height: 24px;
+                font-size: 14px;
+                line-height: 24px;
+                color: $colorG;
+                // 根据类型改变颜色,js交互只需要动态修改class则可以显示不同的颜色
+                &.new-pro {
+                  background-color: #7ECF68;
+                }
+                &.kill-pro {
+                  background-color: #e82626;
+                }
+
+              }
+            }
+            .item-img {
+              img {
+                height: 195px;
+                width: 100%;
+              }
+            }
+            .item-info {
+              h3 {
+                font-size: $fontJ;
+                color: $colorB;
+                line-height: $fontG;
+                font-weight: bold;
+              }
+              p {
+                color: $colorD;
+                line-height: 13px;
+                margin: 6px auto 13px;
+              }
+              .price {
+                color: #f20a0a;
+                font-size: $colorJ;
+                font-weight: bold;
+                cursor: pointer;
+                .iconfont {
+                  @include bgImg(22px, 22px);
+                  content: '';
+                  margin-left: 5px;
+                  vertical-align: center;
+                }
+              }
             }
           }
         }
