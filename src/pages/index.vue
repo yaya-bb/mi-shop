@@ -381,7 +381,6 @@ export default {
         // get用params传参
         params: {
           categoryId: 100012,
-          // 限制个数
           pageSize: 14
         }
       }).then((res) => {
