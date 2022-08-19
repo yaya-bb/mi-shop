@@ -376,7 +376,8 @@ export default {
   },
   methods: {
     init() {
-      // 加载商品列表,res用来接收结果
+      // 加载商品列表
+      // res用来接收结果
       this.axios.get('/products', {
         // get用params传参
         params: {
