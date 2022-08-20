@@ -126,7 +126,7 @@
             <div class="list-box">
               <div class="list" v-for="(arr, k) in phoneList" :key="k">
                 <div class="item" v-for="(item, q) in arr" :key="q">
-                  假设偶数为新品，用三元表达式判断
+                  <!-- 假设偶数为新品，用三元表达式判断 -->
                   <span :class="{'new-pro' : q % 2 == 0}">新品</span>
                   <div class="item-img">
                     <!-- <img :src="item.mainImage" alt=""> -->
