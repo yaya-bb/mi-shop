@@ -150,21 +150,32 @@
         </div>
       </div>
     <service-bar></service-bar>
+    <modal
+      title="提示"
+      sureText="查看购物车"
+      btnType="1"
+      modalType="middle"
+      :showModal="showModal">
+      </modal>
   </div>
 </template>
 <script>
 import 'swiper/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import ServiceBar from '../components/ServiceBar.vue'
+import ServiceBar from '../components/ServiceBar.vue'
+import ServiceBar from '../components/Modal.vue'
+import Modal from '../components/Modal.vue'
 
 export default {
   name: 'index',
   components: {
     ServiceBar,
     swiper,
-    swiperSlide
+    swiperSlide,
+    Modal
   },
-  // // 定义一个过滤器金额格式化(日期格式化也会用到过滤器)
+  // 定义一个过滤器金额格式化(日期格式化也会用到过滤器)
   // filters: {
   //   currency(val) {
   //     // val为空
