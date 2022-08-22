@@ -23,7 +23,7 @@
   export default {
     name: 'Modal',
     props: {
-      // 弹窗类型：小、中、大、表单
+      // 弹窗类型：小，中，大，表单
       modalType: {
         type: String,
         // 默认值
