@@ -138,7 +138,7 @@
                     <p>{{item.subtitle}}</p>
                     <p class="price">{{item.price}}</p> -->
                     <p>超轻薄折叠机身设计，小米自研微水滴形态转轴</p>
-                    <p class="price">8999元
+                    <p class="price" @click="addCart(item.id)">8999元
                       <!-- <span class="iconfont">&#xe70c;</span> -->
                     </p>
                   </div>
@@ -155,7 +155,9 @@
       sureText="查看购物车"
       btnType="1"
       modalType="middle"
-      :showModal="true">
+      :showModal="showModal"
+      v-on:submit="goToCart"
+      v-on:cancel="showModal=false">
       <template v-slot:body>
         <p>商品添加成功！</p>
       </template>
@@ -377,33 +379,47 @@ export default {
       phoneList: [
         [1, 1, 1, 1],
         [1, 1, 1, 1]
-      ]
+      ],
+      showModal: false
     }
-  }
+  },
   // 使用接口实现
   // 初始化商品
-//   mounted() {
-//     // 加载商品列表
-//     this.init()
-//   },
-//   methods: {
-//     init() {
-//       // 加载商品列表
-//       // res用来接收结果
-//       this.axios.get('/products', {
-//         // get用params传参
-//         params: {
-//           categoryId: 100012,
-//           pageSize: 14
-//         }
-//       }).then((res) => {
-//         res.list = res.list.slice(6, 14)
-//         // slice不会改变原数组
-//         // 生成二维数组(0,4)为第一个数组,(4,8)为第二个数组
-//         this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)]
-//       })
-//     }
-//   }
+  // mounted() {
+  //     // 加载商品列表
+  //     this.init()
+  // },
+  methods: {
+    init() {
+      // 加载商品列表
+      // res用来接收结果
+      this.axios.get('/products', {
+        // get用params传参
+        params: {
+          categoryId: 100012,
+          pageSize: 14
+        }
+      }).then((res) => {
+        res.list = res.list.slice(6, 14)
+        // slice不会改变原数组
+        // 生成二维数组(0,4)为第一个数组,(4,8)为第二个数组
+        this.phoneList = [res.list.slice(0, 4), res.list.slice(4, 8)]
+      })
+    },
+    addCart(id) {
+      this.showModal = true
+      // this.axios.post('/carts',{
+      //   productId: id,
+      //   selected: true
+      // }).then(() => {
+      // }).catch(() => {
+      //   this.showModal = true;
+      // })
+    },
+    goToCart() {
+      this.$router.push('/carts')
+    }
+  }
 }
 </script>
 <style lang="scss">

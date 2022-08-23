@@ -1,4 +1,5 @@
 <template>
+  <transition name="slide">
     <div class="modal" v-show="showModal">
     <!-- 遮罩层 -->
     <div class="mask"></div>
@@ -7,22 +8,25 @@
       <div class="modal-header">
         <span>
           标题
-          <a href="javascript:;" class="icon-close iconfont">&#xed1e;</a>
+          <a href="javascript:;" class="icon-close iconfont" @click="$emit('cancel')">&#xed1e;</a>
         </span>
       </div>
       <div class="modal-body">
         <!-- 动态实现-使用slot插槽 -->
-        商品添加成功！
-        <!-- <slot name="body></slot> -->
+        <slot name="body"></slot>
       </div>
       <div class="modal-footer">
-        <div class="btn-group">
-          <a href="javascript:;" class="btn">确定</a>
-          <a href="javascript:;" class="btn">取消</a>
+        <!-- $emit子组件向父组件传递 -->
+        <a href="javascript:;" class="btn" b-if="btnType==1" @click="$emit('submit')">确认</a>
+        <a href="javascript:;" class="btn" b-if="btnType==2" @click="$emit('cancel')">取消</a>
+        <div class="btn-group" v-if="btnType==3">
+          <a href="javascript:;" class="btn" @click="$emit('submit')">确定</a>
+          <a href="javascript:;" class="btn" @click="$emit('cancel')">取消</a>
         </div>
       </div>
     </div>
   </div>
+  </transition>
 </template>
 <script>
 export default {
