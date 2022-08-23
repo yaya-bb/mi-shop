@@ -2,8 +2,8 @@
   font-family: "iconfont"; /* Project id 3552598 */
   src: 
        url('iconfont/iconfont.woff2') format('woff2'),
-       url('iconfont/iconfont.woff') format('woff'),
-       url('iconfont/iconfont.ttf?t=1660541767513') format('truetype');
+       url('iconfont/iconfont.woff?t=1661225368623') format('woff'),
+       url('iconfont/iconfont.ttf?t=1661225368623') format('truetype');
 }
 
 .iconfont {
@@ -12,6 +12,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cuocha_kuai:before {
+  content: "\ed1e";
 }
 
 .icon-arrow-right:before {
