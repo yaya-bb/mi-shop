@@ -7,7 +7,7 @@
     <div class="modal-dialog">
       <div class="modal-header">
         <span>
-          标题
+          {{title}}
           <a href="javascript:;" class="icon-close iconfont" @click="$emit('cancel')">&#xed1e;</a>
         </span>
       </div>
@@ -17,11 +17,11 @@
       </div>
       <div class="modal-footer">
         <!-- $emit子组件向父组件传递 -->
-        <a href="javascript:;" class="btn" b-if="btnType==1" @click="$emit('submit')">确认</a>
-        <a href="javascript:;" class="btn" b-if="btnType==2" @click="$emit('cancel')">取消</a>
+        <a href="javascript:;" class="btn" b-if="btnType==1" @click="$emit('submit')">{{sureText}}</a>
+        <a href="javascript:;" class="btn" b-if="btnType==2" @click="$emit('cancel')">{{cancelText}}</a>
         <div class="btn-group" v-if="btnType==3">
-          <a href="javascript:;" class="btn" @click="$emit('submit')">确定</a>
-          <a href="javascript:;" class="btn" @click="$emit('cancel')">取消</a>
+          <a href="javascript:;" class="btn" @click="$emit('submit')">{{sureText}}</a>
+          <a href="javascript:;" class="btn" @click="$emit('cancel')">{{cancelText}}</a>
         </div>
       </div>
     </div>
