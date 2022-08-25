@@ -88,7 +88,6 @@
             :key="index">
             <img :src="item.img">
           </swiper-slide>
-          <!-- Optional controls -->
           <div class="swiper-pagination"  slot="pagination"></div>
           <div class="swiper-button-prev" slot="button-prev"></div>
           <div class="swiper-button-next" slot="button-next"></div>
@@ -186,6 +185,7 @@ export default {
   //     return '￥' + val.toFixed(2) + '元'
   //   }
   // },
+
   data() {
     return {
       swiperOption: {
@@ -202,28 +202,6 @@ export default {
           prevEl: '.swiper-button-prev'
         }
       },
-      slideList: [
-        {
-          id: ' 44',
-          img: ' https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23ab407e0e0f7654a2112afc26a38d4b.jpg?thumb=1&w=1022&h=383&f=webp&q=90'
-        },
-        {
-          id: ' 45',
-          img: ' https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b6f6c0c0eb8ede475c8858bc1370cfe9.jpg?thumb=1&w=1022&h=383&f=webp&q=90'
-        },
-        {
-          id: ' 46',
-          img: ' https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6cdd149cb0fc40637a84b1fc5971f662.jpg?w=2452&h=920'
-        },
-        {
-          id: ' 47',
-          img: ' https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/36b45c624f42fa81732457e3f9773dbd.jpg?thumb=1&w=1022&h=383&f=webp&q=90'
-        },
-        {
-          id: ' 48',
-          img: ' https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/4cfa4e9a0f10a79ed068f26adf846bfa.jpg?thumb=1&w=1022&h=383&f=webp&q=90'
-        }
-      ],
       menuList: [
         [
           {
@@ -374,6 +352,28 @@ export default {
         {
           id: 36,
           img: 'https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/5668146e20fc025caa756a0f8a3c7da4.jpg?w=632&h=340'
+        }
+      ],
+      slideList: [
+        {
+          id: ' 44',
+          img: ' https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/23ab407e0e0f7654a2112afc26a38d4b.jpg?thumb=1&w=1022&h=383&f=webp&q=90'
+        },
+        {
+          id: ' 45',
+          img: ' https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/b6f6c0c0eb8ede475c8858bc1370cfe9.jpg?thumb=1&w=1022&h=383&f=webp&q=90'
+        },
+        {
+          id: ' 46',
+          img: ' https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/6cdd149cb0fc40637a84b1fc5971f662.jpg?w=2452&h=920'
+        },
+        {
+          id: ' 47',
+          img: ' https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/36b45c624f42fa81732457e3f9773dbd.jpg?thumb=1&w=1022&h=383&f=webp&q=90'
+        },
+        {
+          id: ' 48',
+          img: ' https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/4cfa4e9a0f10a79ed068f26adf846bfa.jpg?thumb=1&w=1022&h=383&f=webp&q=90'
         }
       ],
       phoneList: [

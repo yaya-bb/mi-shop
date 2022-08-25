@@ -3,9 +3,12 @@
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+// import VueLazyload from 'vue-lazyload'
 import App from './App'
 import router from './router'
 import 'styles/iconfont.css'
+import ElementUI from 'element-ui' // element-ui的全部组件
+import 'element-ui/lib/theme-chalk/index.css'// element-ui的css
 
 // 发请求需要设置基础值，baseURL根据前端的跨域方式做调整
 // CORS跨域、JSONP跨域用http:://www....;接口代理直接写/api
@@ -29,7 +32,12 @@ axios.interceptors.response.use(function(response) {
   }
 })
 
+Vue.use(ElementUI) // 使用elementUI
 Vue.use(VueAxios, axios)
+// Vue.use(VueLazyload, {
+//   // 全局配置
+//   loading: '/imgs/loading-svg/loading-bars.svg'
+// })
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
