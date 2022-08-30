@@ -14,7 +14,7 @@
             <a href="javascript:;" v-if="!username" @click="login">登录</a>
             <a href="javascript:;" v-if="username">我的订单</a>
             <!-- 绑定一个事件进行跳转 -->
-            <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart iconfont">&#xe70c;</span>购物车</a>
+            <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart iconfont">&#xe70c;</span>购物车{{cartCount}}</a>
           </div>
         </div>
       </div>
@@ -258,13 +258,29 @@
   </div>
 </template>
 <script>
+// 进行解构
+import { mapState } from 'vuex'
 export default {
   name: 'NavHeader',
   data() {
     return {
-      username: '',
+      // 共享数据使用this.$store.state.+''
       phoneList: []
     }
+  },
+  // 因为有延迟，因此需要用computed计算属性
+  // 写在需要显示的页面
+  // 用于渲染数据
+  computed: {
+    // 将username定义为一个函数
+    // username() {
+    //   return this.$store.state.username
+    // },
+    // cartCount() {
+    //   return this.$store.state.cartCount
+    // },
+    // 等同于上面两个
+    ...mapState(['username', 'cartCount'])
   },
   // 定义一个过滤器金额格式化(日期格式化也会用到过滤器)
   // filters: {

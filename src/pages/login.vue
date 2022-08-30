@@ -40,6 +40,7 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
+// 变量方法太多的时候用mapActions去替代
 export default {
   name: 'login',
   data() {
@@ -61,7 +62,11 @@ export default {
       }).then((res) => {
         // 保存用户名，设置过期时间
         this.$cookie.set('userId', res.id, {expires: 'Session'})
-        // this.$store.dispatch('saveUserName',res.username);
+        // Vuex插件已经挂载到实例
+        // 通过使用dispatch触发actions
+        // 进行存储
+        // this.$store.dispatch('saveUserName', res.username)
+        // 等同于上面一句话的意思
         this.saveUserName(res.username)
         this.$router.push({
           name: 'index',
