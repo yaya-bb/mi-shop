@@ -1,5 +1,5 @@
 <template>
-  <div class="index">
+ <div class="index">
     <div class="container">
       <div class="nav-menu">
         <ul class="menu-wrap">
@@ -478,6 +478,7 @@ export default {
                 height: 75px;
                 li {
                   height: 75px;
+                  width: 85px;
                   // 文字居中
                   line-height: 75px;
                   flex: 1;

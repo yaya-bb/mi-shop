@@ -5,6 +5,7 @@ import Index from '@/pages/index.vue'
 import Product from '@/pages/product.vue'
 import Detail from '@/pages/detail.vue'
 import Cart from '@/pages/cart.vue'
+import Login from '@/pages/login.vue'
 import Order from '@/pages/order.vue'
 import OrderConfirm from '@/pages/orderConfirm.vue'
 import OrderList from '@/pages/orderList.vue'
@@ -37,6 +38,11 @@ export default new Router({
           component: Detail
         }
       ]
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     },
     {
       path: '/cart',

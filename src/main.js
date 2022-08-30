@@ -4,8 +4,10 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 // import VueLazyload from 'vue-lazyload'
+import VueCookie from 'vue-cookie'
 import App from './App'
 import router from './router'
+import store from './store'
 import 'styles/iconfont.css'
 import ElementUI from 'element-ui' // element-ui的全部组件
 import 'element-ui/lib/theme-chalk/index.css'// element-ui的css
@@ -21,19 +23,27 @@ axios.defaults.timeout = 8000
 axios.interceptors.response.use(function(response) {
   // 取到接口的值
   let res = response.data
+  // 哈希路由:#/+''
+  let path = location.hash
   // 状态码等于0表示成功
   if (res.status === 0) {
     return res.data
   } else if (res.status === 10) {
-    // 10表示未登录，则跳转到登录界面
-    window.location.href = '/*/login'
-  } else {
-    alert(res.msg)
+    // 在首页不进行跳转，除首页外的页面需要跳转到登录页面
+    if (path !== '#/index') {
+      // 接口错误机制拦截，10表示未登录，则跳转到登录界面
+      window.location.href = '/#/login'
+    } else {
+      alert(res.msg)
+      // 使用promise.reject抛出异常
+      return Promise.reject(res)
+    }
   }
 })
 
 Vue.use(ElementUI) // 使用elementUI
 Vue.use(VueAxios, axios)
+Vue.use(VueCookie)
 // Vue.use(VueLazyload, {
 //   // 全局配置
 //   loading: '/imgs/loading-svg/loading-bars.svg'
@@ -43,6 +53,7 @@ Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: { App },
   template: '<App/>'
