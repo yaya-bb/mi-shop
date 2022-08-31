@@ -96,8 +96,11 @@ export default {
   &>.container {
     height: 113px;
     img{
+      position: absolute;
+      top: 20px;
+      left: 20px;
       width: auto;
-      height: 100%;
+      height: 60px;
     }
   }
   .wrapper{
@@ -140,9 +143,11 @@ export default {
           }
         }
         .btn{
-          width: 100%;
+          width: 348px;
+          height: 100%;
           line-height: 50px;
           margin-top: 10px;
+          text-align: center;
           font-size: 16px;
         }
         .tips{
