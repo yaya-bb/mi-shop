@@ -39,12 +39,17 @@
       <div class="item-video">
         <h2>60帧超慢动作摄影<br/>慢慢回味每一瞬间的精彩</h2>
         <p>后置960帧电影般超慢动作视频，将眨眼间的美妙展现得淋漓尽致！<br/>更能AI 精准分析视频内容，15个场景智能匹配背景音效。</p>
-        <div class="video-bg" @click="showSlide='slideDown'"></div>
+        <!-- 点击后变为true -->
+        <div class="video-bg" @click="showSlide=true"></div>
         <div class="video-box" v-show="showSlide">
-          <div class="overlay"></div>
-          <div class="video" v-bind:class="showSlide">
-            <!-- 关闭按钮 -->
-            <span class="icon-close iconfont" @click="closeVideo">&#xed1e;</span>
+          <!-- 遮罩层跟着showSlide进行变化 -->
+          <div class="overlay" v-if="showSlide"></div>
+          <!-- video不能使用v-if，会直接展示 -->
+          <!-- 当showSlide为true，则有class -->
+          <div class="video" v-bind:class="{'slide':showSlide}">
+            <span class="icon-close iconfont" @click="closeVideo">
+              &#xed1e;
+            </span>
             <!-- muted静音输出，autoplay自动播放 -->
             <video src="../../public/imgs/product/video.mp4" muted autoplay controls="controls"></video>
           </div>
@@ -66,7 +71,7 @@
     data() {
       return {
         // 控制动画效果
-        showSlide: '',
+        showSlide: false,
         // 商品信息
         product: {},
         swiperOption: {
@@ -191,26 +196,26 @@
             opacity:.4;
             z-index:10;
           }
-          @keyframes slideDown{
-            from {
-              top:-50%;
-              opacity:0;
-            }
-            to {
-              top:50%;
-              opacity:1;
-            }
-          }
-          @keyframes slideUp {
-            from {
-              top:50%;
-              opacity:1;
-            }
-            to {
-              top:-50%;
-              opacity:0;
-            }
-          }
+          // @keyframes slideDown{
+          //   from {
+          //     top:-50%;
+          //     opacity:0;
+          //   }
+          //   to {
+          //     top:50%;
+          //     opacity:1;
+          //   }
+          // }
+          // @keyframes slideUp {
+          //   from {
+          //     top:50%;
+          //     opacity:1;
+          //   }
+          //   to {
+          //     top:-50%;
+          //     opacity:0;
+          //   }
+          // }
           .video {
             position:fixed;
             top:-50%;
@@ -219,14 +224,20 @@
             z-index:10;
             width:1000px;
             height:536px;
-            opacity:1;
-            &.slideDown {
-              animation:slideDown .6s linear;
-              top:50%;
+            opacity:0;
+            transition: all .6s;
+            &.slide {
+              top: 50%;
+              opacity: 1;
             }
-            &.slideUp {
-              animation:slideUp .6s linear;
-            }
+            // opacity:1;
+            // &.slideDown {
+            //   animation:slideDown .6s linear;
+            //   top:50%;
+            // }
+            // &.slideUp {
+            //   animation:slideUp .6s linear;
+            // }
             .icon-close {
               position:absolute;
               top:20px;
