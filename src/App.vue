@@ -19,7 +19,8 @@ export default {
     // 因此在App.vue入口获取一次以及拉取一次，然后在navheader取一次
     // 拉取用户信息
     getUser() {
-      this.axios.get('/user').then((res) => {
+      // res为object，防止出现页面无user时，res为undefined，保证不报错
+      this.axios.get('/user').then((res = {}) => {
         // 保存到vuex里面
         // 如果不加的话刷新后数据不会被保存（为了防止刷新）
         // 因此需要在app.vue再存储一次
@@ -28,7 +29,7 @@ export default {
     },
     // 获取商品购物车的数量
     getCartCount() {
-      this.axios.get('/carts/products/sum').then((res) => {
+      this.axios.get('/carts/products/sum').then((res = 0) => {
         // 保存到vuex里面
         this.$store.dispatch('saveCartCount', res)
       })

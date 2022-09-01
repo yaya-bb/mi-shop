@@ -1,5 +1,6 @@
 <template>
   <div class="product">
+    <!-- 动态绑定一个title，然后在ProductParam上渲染 -->
     <product-param v-bind:title="product.name">
       <template v-slot:buy>
         <button class="btn" @click="buy">立即购买</button>
@@ -41,6 +42,7 @@
         <p>后置960帧电影般超慢动作视频，将眨眼间的美妙展现得淋漓尽致！<br/>更能AI 精准分析视频内容，15个场景智能匹配背景音效。</p>
         <!-- 点击后下拉 -->
         <div class="video-bg" @click="showSlide='slideDown'"></div>
+        <!-- showSlide为空则v-show为false--display:none -->
         <div class="video-box" v-show="showSlide">
           <!-- 遮罩层跟着showSlide进行变化 -->
           <!-- showSlide是下拉slideDown就显示 -->
@@ -48,7 +50,7 @@
           <!-- video不能使用v-if，会直接展示 -->
           <!-- 当showSlide为true，则有class -->
           <div class="video" v-bind:class="showSlide">
-            <span class="icon-close iconfont" @click="showSlide='slideUp'">&#xed1e;</span>
+            <span class="icon-close iconfont" @click="closeVideo">&#xed1e;</span>
             <!-- muted静音输出，autoplay自动播放 -->
             <video src="../../public/imgs/product/video.mp4" muted autoplay controls="controls"></video>
           </div>
@@ -85,11 +87,14 @@
         }
       }
     },
+    // 初始化
     mounted() {
       this.getProductInfo();
     },
     methods: {
       getProductInfo() {
+        // 路由跳转$router
+        // 获取路由参数是用$route
         let id = this.$route.params.id;
         this.axios.get(`/products/${id}`).then((res) => {
           this.product = res;
@@ -97,11 +102,13 @@
       },
       buy() {
         let id = this.$route.params.id;
+        // 跳转到详情页
         this.$router.push(`/detail/${id}`);
       },
       closeVideo() {
         this.showSlide = 'slideUp';
         setTimeout(() => {
+          // 置为空
           this.showSlide = '';
         }, 600)
       }
