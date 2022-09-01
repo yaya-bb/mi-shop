@@ -37,22 +37,23 @@ export default {
       let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
       this.isFixed = scrollTop > 152;
     }
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.initHeight, false)
   }
 }
 </script>
 <style lang="scss" scoped>
   @import './../assets/scss/config.scss';
   @import './../assets/scss/mixin.scss';
-  @import './../assets/scss/reset.scss';
+  // @import './../assets/scss/reset.scss';
   .nav-bar{
     height:70px;
     line-height:70px;
     border-top:1px solid $colorH;
     background-color:$colorG;
-    z-index:10;
-    // 吸顶样式实现
+    // z-index:10;
     &.is_fixed{
-      // 固定定位
       position:fixed;
       top:0;
       width:100%;
@@ -64,12 +65,11 @@ export default {
         font-size:$fontH;
         color:$colorB;
         font-weight:bold;
-        margin-left: 30px;
       }
       .pro-param{
         font-size:$fontJ;
         span{
-          margin:0 10px;
+          margin:0 20px;
         }
         a{
           color:$colorC;
