@@ -39,17 +39,16 @@
       <div class="item-video">
         <h2>60帧超慢动作摄影<br/>慢慢回味每一瞬间的精彩</h2>
         <p>后置960帧电影般超慢动作视频，将眨眼间的美妙展现得淋漓尽致！<br/>更能AI 精准分析视频内容，15个场景智能匹配背景音效。</p>
-        <!-- 点击后变为true -->
-        <div class="video-bg" @click="showSlide=true"></div>
+        <!-- 点击后下拉 -->
+        <div class="video-bg" @click="showSlide='slideDown'"></div>
         <div class="video-box" v-show="showSlide">
           <!-- 遮罩层跟着showSlide进行变化 -->
-          <div class="overlay" v-if="showSlide"></div>
+          <!-- showSlide是下拉slideDown就显示 -->
+          <div class="overlay" v-if="showSlide=='slideDown'"></div>
           <!-- video不能使用v-if，会直接展示 -->
           <!-- 当showSlide为true，则有class -->
-          <div class="video" v-bind:class="{'slide':showSlide}">
-            <span class="icon-close iconfont" @click="closeVideo">
-              &#xed1e;
-            </span>
+          <div class="video" v-bind:class="showSlide">
+            <span class="icon-close iconfont" @click="showSlide='slideUp'">&#xed1e;</span>
             <!-- muted静音输出，autoplay自动播放 -->
             <video src="../../public/imgs/product/video.mp4" muted autoplay controls="controls"></video>
           </div>
@@ -71,7 +70,7 @@
     data() {
       return {
         // 控制动画效果
-        showSlide: false,
+        showSlide: '',
         // 商品信息
         product: {},
         swiperOption: {
@@ -196,26 +195,28 @@
             opacity:.4;
             z-index:10;
           }
-          // @keyframes slideDown{
-          //   from {
-          //     top:-50%;
-          //     opacity:0;
-          //   }
-          //   to {
-          //     top:50%;
-          //     opacity:1;
-          //   }
-          // }
-          // @keyframes slideUp {
-          //   from {
-          //     top:50%;
-          //     opacity:1;
-          //   }
-          //   to {
-          //     top:-50%;
-          //     opacity:0;
-          //   }
-          // }
+          // 下滑的效果
+          @keyframes slideDown{
+            from {
+              top:-50%;
+              opacity:0;
+            }
+            to {
+              top:50%;
+              opacity:1;
+            }
+          }
+          // 上拉的效果
+          @keyframes slideUp {
+            from {
+              top:50%;
+              opacity:1;
+            }
+            to {
+              top:-50%;
+              opacity:0;
+            }
+          }
           .video {
             position:fixed;
             top:-50%;
@@ -224,20 +225,19 @@
             z-index:10;
             width:1000px;
             height:536px;
-            opacity:0;
-            transition: all .6s;
-            &.slide {
-              top: 50%;
-              opacity: 1;
-            }
+            // 完全不透明
+            opacity:1;
             // opacity:1;
-            // &.slideDown {
-            //   animation:slideDown .6s linear;
-            //   top:50%;
-            // }
-            // &.slideUp {
-            //   animation:slideUp .6s linear;
-            // }
+            // 点击后+class
+            &.slideDown {
+              // 调用哪个动画，时间，曲线形式
+              animation:slideDown .6s linear;
+              // 停留在50%
+              top:50%;
+            }
+            &.slideUp {
+              animation:slideUp .6s linear;
+            }
             .icon-close {
               position:absolute;
               top:20px;
