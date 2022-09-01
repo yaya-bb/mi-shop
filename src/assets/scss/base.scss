@@ -1,3 +1,4 @@
+@import './mixin.scss';
 // 公共样式
 .container{
   position: relative;
@@ -31,4 +32,37 @@ input {
 }
 .clearfix::after {
   clear: both;
+}
+// 公共的logo
+.header-logo{
+  display: inline-block;
+  /* 可视化宽度和高度 */
+  width: 55px;
+  height: 55px;
+  a{
+    display: inline-block;
+    /* 实际宽度为图片宽度两倍 */
+    width: 110px;
+    height: 55px;
+    /* scss/sass属性--伪类*/
+    &:before{
+      /* 需要占位 */
+      content: ' ';
+      display: inline-block;
+      @include bgImg(55px,55px,55px);
+      background-image: url('https://s02.mifile.cn/assets/static/image/logo-mi2.png');
+      transition: margin .2s;
+    }
+    &:after{
+      /* 需要占位 */
+      content: ' ';
+      display: inline-block;
+      @include bgImg(55px,55px,55px);
+    }
+    &:hover:before{
+      margin-left: -55px;
+      /* 动画 */
+      transition: margin .2s;
+    }
+  }
 }
