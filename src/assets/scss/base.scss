@@ -15,3 +15,20 @@ input {
   box-sizing: border-box;
   font-size: 14px;
 }
+// 左浮动
+.fl {
+  float: left;
+}
+// 右浮动
+.fr {
+  float: right;
+}
+// 清除浮动
+.clearfix::before,.clearfix::after {
+  // 占位
+  content: ' ';
+  display: table;
+}
+.clearfix::after {
+  clear: both;
+}
