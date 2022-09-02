@@ -159,9 +159,10 @@
       },
       // 购物车下单
       order() {
+        // every指数组的每一项，（都没有选中，则为isCheck）
         let isCheck = this.list.every(item => !item.productSelected);
         if (isCheck) {
-          this.$message.warning('请选择一件商品');
+          alert('请选择一件商品');
         } else {
           this.$router.push('/order/confirm');
         }
@@ -293,6 +294,9 @@
         .total {
           font-size:14px;
           color:#FF6600;
+          .btn {
+            text-align: center;
+          }
           span {
             font-size:24px;
           }
