@@ -102,24 +102,32 @@
         })
       },
       // 更新购物车数量和购物车单选状态
+      // 参数一个是item，一个是类型
       updateCart(item, type) {
+        // 获取数量
         let quantity = item.quantity;
+        // 获取商品是否被选中
         let selected = item.productSelected;
+        // 减数量
         if (type === '-') {
           if (quantity === 1) {
-            this.$message.warning('商品至少保留一件');
+            alert('商品至少保留一件');
             return;
           }
+          // 保证递减直接改变
           --quantity;
+          // 加数量
         } else if (type === '+') {
           if (quantity > item.productStock) {
-            this.$message.warning('购买数量不能超过库存数量');
+            alert('购买数量不能超过库存数量');
             return;
           }
           ++quantity;
         } else {
+          // 促使商品的单选，如果当前商品选中则取反
           selected = !item.productSelected;
         }
+        // 更新商品的数据
         this.axios.put(`/carts/${item.productId}`, {
           quantity,
           selected
