@@ -409,6 +409,7 @@ export default {
     addCart(id) {
       this.axios.post('/carts', {
         productId: id,
+        // 刚加入进去是否有被选中
         selected: true
       }).then((res) => {
         this.showModal = true;

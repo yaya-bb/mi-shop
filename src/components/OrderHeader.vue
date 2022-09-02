@@ -12,16 +12,20 @@
         </h2>
       </div>
       <div class="username">
-        <a href="javascript:;">Jack</a>
+        <a href="javascript:;">{{username}}</a>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'OrderHeader',
   props: {
     title: String
+  },
+  computed: {
+    ...mapState(['username'])
   }
 }
 </script>
