@@ -9,6 +9,7 @@
       <div class="container">
         <div class="cart-box">
           <ul class="cart-item-head">
+            <!-- 点击绑定全选事件 -->
             <li class="col-1"><span class="checkbox" v-bind:class="{'checked':allChecked}" @click="toggleAll"></span>全选</li>
             <li class="col-3">商品名称</li>
             <li class="col-1">单价</li>
@@ -92,11 +93,12 @@
         this.axios.get('/carts').then((res) => {
           // 设置的data值等于后台接口的数据
           // 绑定接口
-          this.list = res.cartProductVoList || [];
-          this.allChecked = res.selectedAll;
-          this.cartTotalPrice = res.cartTotalPrice;
-          this.checkedNum = res.cartTotalQuantity;
-          // this.renderData(res);
+          // this.list = res.cartProductVoList || [];
+          // this.allChecked = res.selectedAll;
+          // this.cartTotalPrice = res.cartTotalPrice;
+          // // 进行过滤,过滤选中的，es6的写法实际等于=>{return item.productSelected}
+          // this.checkedNum = this.list.filter(item => item.productSelected);
+          this.renderData(res);
         })
       },
       // 更新购物车数量和购物车单选状态
@@ -134,6 +136,7 @@
       },
       // 控制全选功能
       toggleAll() {
+        // 判断是否全选或不全选，定义接口地址
         let url = this.allChecked ? '/carts/unSelectAll' : '/carts/selectAll';
         this.axios.put(url).then((res) => {
           this.renderData(res);
