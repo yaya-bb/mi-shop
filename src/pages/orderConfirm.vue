@@ -113,23 +113,28 @@
       @cancel="showEditModal=false"
       @submit="submitAddress"
     >
+    <!-- 插槽传递 -->
       <template v-slot:body>
         <div class="edit-wrap">
           <div class="item">
+            <!-- placeholder默认显示的文字 -->
             <input type="text" class="input" placeholder="姓名" v-model="checkedItem.receiverName">
             <input type="text" class="input" placeholder="手机号" v-model="checkedItem.receiverMobile">
           </div>
           <div class="item">
+            <!-- 省份 -->
             <select name="province" v-model="checkedItem.receiverProvince">
               <option value="北京">北京</option>
               <option value="天津">天津</option>
               <option value="河北">河北</option>
             </select>
+            <!-- 城市 -->
             <select name="city" v-model="checkedItem.receiverCity">
               <option value="北京">北京</option>
               <option value="天津">天津</option>
               <option value="河北">石家庄</option>
             </select>
+            <!-- 区 -->
             <select name="district" v-model="checkedItem.receiverDistrict">
               <option value="北京">昌平区</option>
               <option value="天津">海淀区</option>
@@ -218,6 +223,7 @@ export default {
     delAddress(item) {
       this.checkedItem = item;
       this.userAction = 2;
+      // 弹窗显示
       this.showDelModal = true;
     },
     // 地址删除、编辑、新增功能
@@ -273,6 +279,7 @@ export default {
       // 动态获取方法method进行调用，url为地址，params为参数
       this.axios[method](url, params).then(() => {
         this.closeModal();
+        // 拉取最新的地址
         this.getAddressList();
         this.$message.success('操作成功');
       });
@@ -318,6 +325,7 @@ export default {
 }
 </script>
 <style lang="scss">
+  @import './../assets/scss/base.scss';
    .order-confirm{
     .wrapper{
       background-color:#F5F5F5;
@@ -473,35 +481,37 @@ export default {
         }
       }
     }
-      .edit-wrap{
-        font-size:14px;
-        .item{
-          margin-bottom: 15px;
-          input{
-            display: inline-block;
-            width: 283px;
-            height: 40px;
-            line-height:40px;
-            padding-left: 15px;
-            border: 1px solid #E5E5E5;
-            &+.input{
-              margin-left:14px;
-            }
-          }
-          select{
-            height:40px;
-            line-height: 40px;
-            border:1px solid #E5E5E5;
-            margin-right:15px;
-          }
-          textarea{
-            height: 62px;
-            width: 100%;
-            padding:13px 15px;
-            box-sizing:border-box;
-            border:1px solid #E5E5E5;
+    .edit-wrap{
+      font-size:14px;
+      .item{
+        margin-bottom: 15px;
+        input{
+          display: inline-block;
+          width: 280px;
+          height: 35px;
+          line-height:35px;
+          box-sizing: border-box;
+          padding-left: 15px;
+          border: 1px solid #E5E5E5;
+          // 第二元素指定margin值，兄弟元素
+          &+.input{
+            margin-left:14px;
           }
         }
+        select{
+          height:35px;
+          line-height: 35px;
+          border:1px solid #E5E5E5;
+          margin-right:15px;
+        }
+        textarea{
+          height: 60px;
+          width: 100%;
+          padding:13px 15px;
+          box-sizing:border-box;
+          border:1px solid #E5E5E5;
+        }
       }
+    }
   }
 </style>

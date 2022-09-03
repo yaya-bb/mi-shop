@@ -1,4 +1,5 @@
 <template>
+  <!-- 弹窗 -->
   <transition name="slide">
     <div class="modal" v-show="showModal">
     <!-- 遮罩层 -->
