@@ -47,6 +47,7 @@
           <h3>选择以下支付方式付款</h3>
           <div class="pay-way">
             <p>支付平台</p>
+            <!-- 动态渲染被选中状态当类型等于1时，支付宝被选中 -->
             <div class="pay pay-ali" :class="{'checked':payType==1}" @click="paySubmit(1)"></div>
             <div class="pay pay-wechat" :class="{'checked':payType==2}" @click="paySubmit(2)"></div>
           </div>
@@ -119,8 +120,10 @@ export default{
       })
     },
     paySubmit(payType) {
+      // 支付宝支付
       if (payType == 1) {
-        window.open('/#/order/alipay ? orderId=' + this.orderId, '_blank');
+        // 打开新窗口hash路由
+        window.open('/#/order/alipay?orderId=' + this.orderId, '_blank');
       } else {
         this.axios.post('/pay', {
           orderId: this.orderId,
