@@ -2,7 +2,7 @@
   <div class="cart">
     <order-header title="我的购物车">
       <template v-slot:tip>
-        <span>温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</span>
+        <span class="tip">温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</span>
       </template>
     </order-header>
     <div class="wrapper">
@@ -111,7 +111,8 @@
         // 减数量
         if (type === '-') {
           if (quantity === 1) {
-            alert('商品至少保留一件');
+            // 全局插件的用法
+            this.$message.warning('商品至少保留一件');
             return;
           }
           // 保证递减直接改变
@@ -119,7 +120,7 @@
           // 加数量
         } else if (type === '+') {
           if (quantity > item.productStock) {
-            alert('购买数量不能超过库存数量');
+            this.$message.warning('购买数量不能超过库存数量');
             return;
           }
           ++quantity;
@@ -162,7 +163,7 @@
         // every指数组的每一项，（都没有选中，则为isCheck）
         let isCheck = this.list.every(item => !item.productSelected);
         if (isCheck) {
-          alert('请选择一件商品');
+          this.$message.warning('请选择一件商品');
         } else {
           this.$router.push('/order/confirm');
         }
@@ -172,6 +173,11 @@
 </script>
 <style lang="scss">
   .cart {
+    .tip {
+      font-size: 12px;
+      font-weight: normal;
+      color: #333333 ghc;
+    }
     .wrapper {
       background-color:#F5F5F5;
       padding-top:30px;

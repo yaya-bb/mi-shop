@@ -5,11 +5,14 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 // import VueLazyload from 'vue-lazyload'
 import VueCookie from 'vue-cookie'
+import { Message } from 'element-ui'
+// 样式也需引入
+// import 'element-ui/lib/theme-chalk/index.css'
 import App from './App'
 import router from './router'
 import store from './store'
 import 'styles/iconfont.css'
-import ElementUI from 'element-ui' // element-ui的全部组件
+// import ElementUI from 'element-ui' // element-ui的全部组件
 import 'element-ui/lib/theme-chalk/index.css'// element-ui的css
 
 // 发请求需要设置基础值，baseURL根据前端的跨域方式做调整
@@ -34,21 +37,24 @@ axios.interceptors.response.use(function(response) {
       // 接口错误机制拦截，10表示未登录，则跳转到登录界面
       window.location.href = '/#/login'
     } else {
-      alert(res.msg)
+      // alert(res.msg)
+      Message.warning(res.msg)
       // 使用promise.reject抛出异常
       return Promise.reject(res)
     }
   }
 })
-
-Vue.use(ElementUI) // 使用elementUI
-Vue.use(VueAxios, axios)
-Vue.use(VueCookie)
+// Vue.component(Message);
+// Vue.use(ElementUI) // 使用elementUI
+Vue.use(VueAxios, axios);
+Vue.use(VueCookie);
+// 将这个对象扩展进来
 // Vue.use(VueLazyload, {
 //   // 全局配置
 //   loading: '/imgs/loading-svg/loading-bars.svg'
 // })
 Vue.config.productionTip = false
+Vue.prototype.$message = Message
 
 /* eslint-disable no-new */
 new Vue({
