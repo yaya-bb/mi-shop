@@ -10,9 +10,11 @@ export default {
   name: 'App',
   mounted() {
     // storage.clear('a')
-    // 进行获取
-    this.getUser()
-    this.getCartCount()
+    if (this.$cookie.get('userId')) {
+      // 如果有用户则进行获取
+      this.getUser()
+      this.getCartCount()
+    }
   },
   methods: {
     // 如果还没登录，将接口放在navheader就没有意义为空，最终还需要在登录页面把数据存储进去

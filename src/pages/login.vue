@@ -60,7 +60,7 @@ export default {
         username,
         password
       }).then((res) => {
-        // 保存用户名，设置过期时间
+        // 保存用户名，设置过期时间,Session会话级别
         this.$cookie.set('userId', res.id, {expires: 'Session'})
         // Vuex插件已经挂载到实例
         // 通过使用dispatch触发actions
@@ -69,10 +69,16 @@ export default {
         // 等同于上面一句话的意思
         this.saveUserName(res.username)
         this.$router.push({
+          // 传参方法一
           name: 'index',
           params: {
             from: 'login'
           }
+          // 传参方法二
+          // path: '/index',
+          // query: {
+          //   from: 'login'
+          // }
         })
       })
     },
@@ -104,7 +110,7 @@ export default {
     }
   }
   .wrapper{
-    background: url('/imgs/login-bg.jpg') no-repeat center;
+    background: url('../../public/imgs/login-bg.jpg') no-repeat center;
     .container {
       height: 576px;
       .login-form {

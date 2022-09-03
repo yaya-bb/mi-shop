@@ -1,4 +1,5 @@
 {
+  // 解码规则
   "presets": [
     ["env", {
       "modules": false,
@@ -8,5 +9,6 @@
     }],
     "stage-2"
   ],
+  // 辅助性插件
   "plugins": ["transform-vue-jsx", "transform-runtime"]
 }

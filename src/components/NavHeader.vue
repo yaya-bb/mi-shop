@@ -12,6 +12,7 @@
           <div class="topbar-user">
             <a href="javascript:;" v-if="username">{{username}}</a>
             <a href="javascript:;" v-if="!username" @click="login">登录</a>
+            <a href="javascript:;" v-if="username" @click="logout">退出</a>
             <a href="javascript:;" v-if="username">我的订单</a>
             <!-- 绑定一个事件进行跳转 -->
             <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart iconfont">&#xe70c;</span>购物车{{cartCount}}</a>
@@ -291,7 +292,14 @@ export default {
   //   }
   // },
   mounted() {
-    this.getProductList()
+    this.getProductList();
+    // 获取当前路由的参数route
+    let params = this.$route.params;
+    // params为true并且处于login页面
+    if (params && params.from === 'login') {
+        // 保持购物车的数量，避免退出用户导致数据清零
+        this.getCartCount();
+      }
   },
   methods: {
     // 跳转到登录页面
@@ -315,6 +323,23 @@ export default {
       // 取参数如何取呢:router.parent取参数
       // 跳转路由使用this.$router.push
       this.$router.push('/cart')
+    },
+        // 获取商品购物车的数量
+    getCartCount() {
+      this.axios.get('/carts/products/sum').then((res = 0) => {
+        // 保存到vuex里面
+        this.$store.dispatch('saveCartCount', res)
+      })
+    },
+    logout() {
+      this.axios.post('/user/logout').then(() => {
+        this.$message.success('退出成功')
+        // .set:进行设置，expires:过期时间（与后台时间保持一致）-1即刻过期
+        this.$cookie.set('userId', '', {expires: '-1'})
+        // 清空数据
+        this.$store.dispatch('saveUserName', '')
+        this.$store.dispatch('saveCartCount', '0')
+      })
     }
   }
 }
