@@ -176,7 +176,7 @@
     .tip {
       font-size: 12px;
       font-weight: normal;
-      color: #333333 ghc;
+      color: #333333;
     }
     .wrapper {
       background-color:#F5F5F5;

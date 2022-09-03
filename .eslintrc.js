@@ -22,6 +22,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     camelcase: 'off',
+    "eqeqeq": ["off"],
     // allow async-await
     "space-before-function-paren": 0,
     'generator-star-spacing': 'off',
