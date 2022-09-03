@@ -31,6 +31,9 @@
           <div class="item-address">
             <h2 class="addr-title">收货地址</h2>
             <div class="addr-list clearfix">
+              <!-- 点击地址则为选中地址,需要动态绑定 -->
+              <!-- index为循环的索引值 -->
+              <!-- 当前点击的索引等于当前的索引,则点亮 -->
               <div class="addr-info" :class="{'checked':index == checkIndex}" @click="checkIndex=index" v-for="(item,index) in list" :key="index">
                 <h2>{{item.receiverName}}</h2>
                 <div class="phone">{{item.receiverMobile}}</div>
@@ -218,6 +221,7 @@ export default {
       this.showEditModal = true;
     },
     // 打开新增地址弹框
+    // item方便给予赋值,item:选中的对象
     editAddressModal(item) {
       this.userAction = 1;
       this.checkedItem = item;
@@ -241,7 +245,7 @@ export default {
         method = 'post';
         url = '/shippings';
       } else if (userAction == 1) {
-        // 编辑
+        // 1:编辑
         method = 'put';
         url = `/shippings/${checkedItem.id}`;
       } else {
@@ -249,9 +253,9 @@ export default {
         method = 'delete';
         url = `/shippings/${checkedItem.id}`;
       }
+      // 校验内容
       if (userAction == 0 || userAction == 1) {
         // 通过解构方式将其解构出来，获取地址名称
-        // 方便进行代码的校验
         let {receiverName, receiverMobile, receiverProvince, receiverCity, receiverDistrict, receiverAddress, receiverZip} = checkedItem;
         // 第二次提交应当置为空
         let errMsg = '';
@@ -316,14 +320,21 @@ export default {
     },
     // 订单提交
     orderSubmit() {
+      // this.checkIndex当前选中的索引
+      // this.list选中的列表,
+      // 在列表中找索引
       let item = this.list[this.checkIndex];
+      // item为空,则地址不存在
       if (!item) {
         this.$message.error('请选择一个收货地址');
         return;
       }
+      // 调接口
+      // 创建订单
       this.axios.post('/orders', {
         shippingId: item.id
       }).then((res) => {
+        // res返回订单号
         this.$router.push({
           path: '/order/pay',
           query: {
