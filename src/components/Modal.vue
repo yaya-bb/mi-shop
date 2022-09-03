@@ -16,7 +16,7 @@
         <slot name="body"></slot>
       </div>
       <div class="modal-footer">
-        <!-- $emit子组件向父组件传递 -->
+        <!-- $emit子组件向父组件传递，需要省略this -->
         <a href="javascript:;" class="btn" b-if="btnType==1" @click="$emit('submit')">{{sureText}}</a>
         <a href="javascript:;" class="btn" b-if="btnType==2" @click="$emit('cancel')">{{cancelText}}</a>
         <div class="btn-group" v-if="btnType==3">

@@ -163,7 +163,7 @@
 </template>
 <script>
 import OrderHeader from './../components/OrderHeader'
-import Modal from './../components/Modal'
+import Modal from './../components/Modal.vue'
 export default {
   name: 'order-confirm',
   data() {
@@ -176,7 +176,7 @@ export default {
       cartTotalPrice: 0,
       // 商品结算数量
       count: 0,
-      // 选中的商品对象
+      // 选中的商品对象,删除和选中都需要复用
       checkedItem: {},
       // 用户行为 0：新增 1：编辑 2：删除
       userAction: '',
@@ -214,6 +214,7 @@ export default {
       this.checkedItem = item;
       this.showEditModal = true;
     },
+    // 删除地址
     delAddress(item) {
       this.checkedItem = item;
       this.userAction = 2;
@@ -221,17 +222,21 @@ export default {
     },
     // 地址删除、编辑、新增功能
     submitAddress() {
+      // 解构
       let {checkedItem, userAction} = this;
       let method = {};
       let url = {};
       let params = {};
       if (userAction == 0) {
+        // 新增
         method = 'post';
         url = '/shippings';
       } else if (userAction == 1) {
+        // 编辑
         method = 'put';
         url = `/shippings/${checkedItem.id}`;
       } else {
+        // 删除
         method = 'delete';
         url = `/shippings/${checkedItem.id}`;
       }
@@ -265,6 +270,7 @@ export default {
           receiverZip
         }
       }
+      // 动态获取方法method进行调用，url为地址，params为参数
       this.axios[method](url, params).then(() => {
         this.closeModal();
         this.getAddressList();
@@ -378,7 +384,7 @@ export default {
                 width:30px;
                 height:30px;
                 border-radius:50%;
-                background:url('/imgs/icon-add.png') #E0E0E0 no-repeat center;
+                background:url('../../public/imgs/icon-add.png') #E0E0E0 no-repeat center;
                 background-size:14px;
                 margin: 0 auto;
                 margin-top: 45px;
