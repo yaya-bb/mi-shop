@@ -48,6 +48,7 @@
                   </a>
                 </div>
               </div>
+              <!-- 点击后弹出模板框 -->
               <div class="addr-add" @click="openAddressModal">
                 <div class="icon-add"></div>
                 <div>添加新地址</div>
@@ -145,6 +146,7 @@
             </select>
           </div>
           <div class="item">
+            <!-- 绑定表单的对象，提交时只需获取对象的值就可 -->
             <textarea name="street" v-model="checkedItem.receiverAddress"></textarea>
           </div>
           <div class="item">
@@ -209,8 +211,10 @@ export default {
     },
     // 打开新增地址弹框
     openAddressModal() {
+      // 新增
       this.userAction = 0;
       this.checkedItem = {};
+      // 编辑弹框显示
       this.showEditModal = true;
     },
     // 打开新增地址弹框
@@ -230,8 +234,7 @@ export default {
     submitAddress() {
       // 解构
       let {checkedItem, userAction} = this;
-      let method = {};
-      let url = {};
+      let method, url;
       let params = {};
       if (userAction == 0) {
         // 新增
@@ -247,10 +250,16 @@ export default {
         url = `/shippings/${checkedItem.id}`;
       }
       if (userAction == 0 || userAction == 1) {
+        // 通过解构方式将其解构出来，获取地址名称
+        // 方便进行代码的校验
         let {receiverName, receiverMobile, receiverProvince, receiverCity, receiverDistrict, receiverAddress, receiverZip} = checkedItem;
+        // 第二次提交应当置为空
         let errMsg = '';
+        // 为空则进行提示
         if (!receiverName) {
           errMsg = '请输入收货人名称';
+          // 正则手机号/\d{11}/
+          // 不是手机号以及不够11位,则进行提示
         } else if (!receiverMobile || !/\d{11}/.test(receiverMobile)) {
           errMsg = '请输入正确格式的手机号';
         } else if (!receiverProvince) {
@@ -266,6 +275,7 @@ export default {
           this.$message.error(errMsg);
           return;
         }
+        // key值与value值相等时，可省略
         params = {
           receiverName,
           receiverMobile,
@@ -288,6 +298,7 @@ export default {
       this.checkedItem = {};
       this.userAction = '';
       this.showDelModal = false;
+      // 提交成功后弹窗需要进行关闭
       this.showEditModal = false;
     },
     getCartList() {
