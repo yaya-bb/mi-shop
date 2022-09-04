@@ -86,7 +86,7 @@
 import OrderHeader from './../components/OrderHeader'
 import Loading from './../components/Loading'
 import NoData from './../components/NoData'
-import { Pagination } from 'element-ui'
+import { Pagination, Button } from 'element-ui'
 export default {
   name: 'orderList',
   // 第2步：注册
@@ -95,11 +95,13 @@ export default {
     Loading,
     NoData,
     // 动态的变量加载分页器
-    [Pagination.name]: Pagination
+    [Pagination.name]: Pagination,
+    // Button.name=el-button;因此用name方式:Button去定义变量
+    [Button.name]: Button
   },
   data() {
     return {
-      loading: true,
+      loading: false,
       list: [],
       pageSize: 10,
       pageNum: 1,
@@ -111,13 +113,16 @@ export default {
   },
   methods: {
     getOrderList() {
+      this.loading = true;
       this.axios.get('/orders', {
         // 参数
         params: {
+          pageSize: 2,
           pageNum: this.pageNum
         }
       }).then((res) => {
-        this.list = res.list;
+        // 实现数据的拼接从而实现数据的累加
+        this.list = this.list.concat(res.list);
         // 请求时loading等于false
         this.loading = false;
         this.total = res.total;
@@ -145,6 +150,11 @@ export default {
     handleChange(pageNum) {
       // 当页面发生变化，则将页面数保存给他
       this.pageNum = pageNum;
+      this.getOrderList();
+    },
+    // （加载更多按钮）点击加载更多，页码进行累加
+    loadMore() {
+      this.pageNum++;
       this.getOrderList();
     }
   }
@@ -219,10 +229,12 @@ export default {
           background-color: #FF6600;
           color: #fff;
         }
+        // el-***-primary改变按钮颜色也可以使用自定义主题
         .el-button--primary{
           background-color: #FF6600;
           border-color: #FF6600;
         }
+        // 按钮居中button放在div里面
         .load-more,.scroll-more{
           text-align:center;
         }
