@@ -54,6 +54,9 @@
         </div>
       </div>
     </div>
+    <!-- 微信二维码，用v-if控制它的是否显示 -->
+    <!-- 需要接收子组件提交过来关闭的事件 -->
+    <!-- 需要哪些属性也需要表示出来，严格按照组件定义的参数 -->
     <scan-pay-code v-if="showPay" @close="closePayModal" :img="payImg"></scan-pay-code>
     <modal
       title="支付确认"
@@ -71,9 +74,10 @@
   </div>
 </template>
 <script>
-// import QRCode from 'qrcode'
+import QRCode from 'qrcode'
 import OrderHeader from './../components/OrderHeader'
-// import ScanPayCode from './../components/ScanPayCode'
+// 微信专用支付弹窗
+import ScanPayCode from './../components/ScanPayCode'
 import Modal from './../components/Modal'
 export default{
   name: 'order-pay',
@@ -103,7 +107,7 @@ export default{
   },
   components: {
     OrderHeader,
-    // ScanPayCode,
+    ScanPayCode,
     Modal
   },
   mounted() {
@@ -120,9 +124,9 @@ export default{
       })
     },
     paySubmit(payType) {
-      // 支付宝支付
+      // 第1步：调接口，拿到服务端返回的字符串
+      // 支付宝
       if (payType == 1) {
-        // 打开新窗口hash路由
         window.open('/#/order/alipay?orderId=' + this.orderId, '_blank');
       } else {
         this.axios.post('/pay', {
@@ -133,21 +137,24 @@ export default{
           // 1支付宝，2微信
           payType: 2
         }).then((res) => {
-          // QRCode.toDataURL(res.content)
-          // .then(url => {
-          //   this.showPay = true;
-          //   this.payImg = url;
-          //   this.loopOrderState();
+          // 把内容转化为二维码图片地址
+          // 第2步：安装插件，将其转换为64位的图片，将图片保存下来，传给子组件进行渲染
+          QRCode.toDataURL(res.content)
+          .then(url => {
+            this.showPay = true;
+            // 传参数
+            this.payImg = url;
+            this.loopOrderState();
           })
           .catch(() => {
             this.$message.error('微信二维码生成失败，请稍后重试');
           })
+        })
       }
     },
-    //   }
-    // },
     // 关闭微信弹框
     closePayModal() {
+    // 当子组件点击关闭之后，会触发父组件来关闭
       this.showPay = false;
       this.showPayModal = true;
       clearInterval(this.T);
