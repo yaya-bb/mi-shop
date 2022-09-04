@@ -50,6 +50,9 @@
               </div>
             </div>
           </div>
+          <!-- 分页器 -->
+          <!-- layout是布局 -->
+          <!-- pageSize需要赋值数字并且动态赋值 -->
           <el-pagination
             v-if="true"
             class="pagination"
@@ -83,18 +86,24 @@
 import OrderHeader from './../components/OrderHeader'
 import Loading from './../components/Loading'
 import NoData from './../components/NoData'
+import { Pagination } from 'element-ui'
 export default {
   name: 'orderList',
   // 第2步：注册
   components: {
     OrderHeader,
     Loading,
-    NoData
+    NoData,
+    // 动态的变量加载分页器
+    [Pagination.name]: Pagination
   },
   data() {
     return {
       loading: true,
-      list: []
+      list: [],
+      pageSize: 10,
+      pageNum: 1,
+      total: 0
     }
   },
   mounted() {
@@ -102,10 +111,16 @@ export default {
   },
   methods: {
     getOrderList() {
-      this.axios.get('/orders').then((res) => {
+      this.axios.get('/orders', {
+        // 参数
+        params: {
+          pageNum: this.pageNum
+        }
+      }).then((res) => {
         this.list = res.list;
         // 请求时loading等于false
         this.loading = false;
+        this.total = res.total;
       }).catch(() => {
         // 报错时进catch进行捕获
         this.loading = false;
@@ -125,6 +140,12 @@ export default {
           orderNo
         }
       })
+    },
+    // currentPage改变时会触发,pageNum当前处于第几页
+    handleChange(pageNum) {
+      // 当页面发生变化，则将页面数保存给他
+      this.pageNum = pageNum;
+      this.getOrderList();
     }
   }
 }
@@ -196,6 +217,7 @@ export default {
         }
         .el-pagination.is-background .el-pager li:not(.disabled).active{
           background-color: #FF6600;
+          color: #fff;
         }
         .el-button--primary{
           background-color: #FF6600;
