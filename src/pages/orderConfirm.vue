@@ -1,11 +1,12 @@
 <template>
   <div class="order-confirm">
-    <!-- <order-header title="订单确认">
+    <order-header title="订单确认">
       <template v-slot:tip>
+        <span class="tip">请认真填写收货地址</span>
       </template>
-    </order-header> -->
-    <!-- svg矢量图不会失帧，也不会占用带宽 -->
-    <!-- 可使用svg替代一些icon，减少请求的数量 -->
+    </order-header>
+    <!-- svg矢量图不会失帧，也不会占用带宽
+         可使用svg替代一些icon，减少请求的数量 -->
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; width: 0px; height: 0px; overflow: hidden;">
       <defs>
         <symbol id="icon-add" viewBox="0 0 31 32">
@@ -349,6 +350,11 @@ export default {
 <style lang="scss">
   @import './../assets/scss/base.scss';
    .order-confirm{
+    .tip{
+      font-size: 12px;
+      color: #333;
+      font-weight: normal;
+    }
     .wrapper{
       background-color:#F5F5F5;
       padding-top:30px;
