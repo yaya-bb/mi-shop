@@ -1,4 +1,5 @@
 <template>
+  <!-- 讲了三种分页， -->
   <div class="order-list">
     <order-header title="订单列表">
       <template v-slot:tip>
@@ -50,7 +51,7 @@
               </div>
             </div>
           </div>
-          <!-- 分页器 -->
+          <!-- 只保留分页器，所以v-if=true -->
           <!-- layout是布局 -->
           <!-- pageSize需要赋值数字并且动态赋值 -->
           <el-pagination
@@ -63,12 +64,15 @@
             @current-change="handleChange"
             >
           </el-pagination>
-          <div class="load-more" v-if="showNextPage">
+          <!-- 上线时将它屏蔽掉 -->
+          <div class="load-more" v-if="false">
               <el-button type="primary" :loading="loading" @click="loadMore">加载更多</el-button>
           </div>
           <!-- 滚动加载 -->
           <!-- v-infinite-scroll加载方法，当滚动的时候触发整个方法 -->
           <!-- infinite-scroll-distance距离底部有多少的时候进行滚动 -->
+          <!-- infinite-scroll-disabled=true将其禁用掉 -->
+          <!-- v-if=false将其屏蔽 -->
           <div class="scroll-more"
             v-infinite-scroll="scrollMore"
             infinite-scroll-disabled="true"
@@ -183,6 +187,8 @@ export default {
       }, 500)
     },
     // 专门给scrollMore使用
+    // 三种分页（滚动加载，加载更多，分页器）同时都在这里实现，线上部署只能保留一种
+
     getList() {
       // 请求开始之前loading为true
       this.loading = true;

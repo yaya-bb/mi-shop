@@ -34,7 +34,7 @@ export default {
     margin-bottom: 31px;
     img {
       width: 53px;
-      height: 36px;
+      height: 100%;
     }
    }
    .footer-link {
