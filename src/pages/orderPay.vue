@@ -67,6 +67,7 @@
       @cancel="showPayModal=false"
       @submit="goOrderList"
     >
+      <!-- 绑定插槽 -->
       <template v-slot:body>
         <p>您确认是否完成支付？</p>
       </template>
@@ -147,6 +148,7 @@ export default{
             this.loopOrderState();
           })
           .catch(() => {
+            // 报错进catch
             this.$message.error('微信二维码生成失败，请稍后重试');
           })
         })
@@ -156,20 +158,26 @@ export default{
     closePayModal() {
     // 当子组件点击关闭之后，会触发父组件来关闭
       this.showPay = false;
+      // 通知弹窗显示，向客户确认是否已支付完成
       this.showPayModal = true;
+      // 关闭定时器
       clearInterval(this.T);
     },
-    // 轮询当前订单支付状态
+    // 轮询当前订单支付状态（定时循环）
     loopOrderState() {
+      // 一直为调用，直到手动将其终止
       this.T = setInterval(() => {
+        // 通过then进行接收
         this.axios.get(`/orders/${this.orderId}`).then((res) => {
           if (res.status == 20) {
             clearInterval(this.T);
+            // 回到订单列表
             this.goOrderList();
           }
         })
       }, 1000);
     },
+    // 跳转到订单列表中
     goOrderList() {
       this.$router.push('/order/list');
     }
