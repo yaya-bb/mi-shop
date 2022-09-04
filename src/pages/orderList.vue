@@ -63,15 +63,19 @@
             @current-change="handleChange"
             >
           </el-pagination>
-          <div class="load-more" v-if="false">
+          <div class="load-more" v-if="showNextPage">
               <el-button type="primary" :loading="loading" @click="loadMore">加载更多</el-button>
           </div>
+          <!-- 滚动加载 -->
+          <!-- v-infinite-scroll加载方法，当滚动的时候触发整个方法 -->
+          <!-- infinite-scroll-distance距离底部有多少的时候进行滚动 -->
           <div class="scroll-more"
             v-infinite-scroll="scrollMore"
             infinite-scroll-disabled="true"
             infinite-scroll-distance="410"
             v-if="false"
           >
+          <!-- 当滚动的时候才会出现loading的svg -->
             <img src="../../public/imgs/loading-svg/loading-spinning-bubbles.svg" alt="" v-show="loading">
           </div>
           <!-- 条件：loading已经关闭/订单列表数据为0 -->
@@ -87,6 +91,8 @@ import OrderHeader from './../components/OrderHeader'
 import Loading from './../components/Loading'
 import NoData from './../components/NoData'
 import { Pagination, Button } from 'element-ui'
+// 局部注册只在这个页面
+import infiniteScroll from 'vue-infinite-scroll'
 export default {
   name: 'orderList',
   // 第2步：注册
@@ -99,13 +105,21 @@ export default {
     // Button.name=el-button;因此用name方式:Button去定义变量
     [Button.name]: Button
   },
+  // 局部注册
+  directives: {
+    infiniteScroll
+  },
   data() {
     return {
       loading: false,
       list: [],
       pageSize: 10,
       pageNum: 1,
-      total: 0
+      total: 0,
+      // 滚动加载是否触发,false则没有被触发，true表示禁用
+      busy: false,
+      // 默认有下一页(加载更多，是否显示按钮)
+      showNextPage: true
     }
   },
   mounted() {
@@ -114,10 +128,11 @@ export default {
   methods: {
     getOrderList() {
       this.loading = true;
+      this.busy = true;
       this.axios.get('/orders', {
         // 参数
         params: {
-          pageSize: 2,
+          pageSize: 10,
           pageNum: this.pageNum
         }
       }).then((res) => {
@@ -126,6 +141,8 @@ export default {
         // 请求时loading等于false
         this.loading = false;
         this.total = res.total;
+        this.showNextPage = res.hasNextPage;
+        this.busy = false;
       }).catch(() => {
         // 报错时进catch进行捕获
         this.loading = false;
@@ -156,6 +173,38 @@ export default {
     loadMore() {
       this.pageNum++;
       this.getOrderList();
+    },
+    // 滚动加载，通过npm插件实现
+    scrollMore() {
+      this.busy = true;
+      setTimeout(() => {
+        this.pageNum++;
+        this.getList();
+      }, 500)
+    },
+    // 专门给scrollMore使用
+    getList() {
+      // 请求开始之前loading为true
+      this.loading = true;
+      this.axios.get('/orders', {
+        // 参数
+        params: {
+          pageSize: 10,
+          pageNum: this.pageNum
+        }
+      }).then((res) => {
+        // 实现数据的拼接从而实现数据的累加
+        this.list = this.list.concat(res.list);
+        // 请求结束后loading为false
+        this.loading = false;
+        // 判断有没有下一页
+        if (res.hasNextPage) {
+          // 有的话将释放关闭并禁用，不能进行滚动
+          this.busy = false;
+        } else {
+          this.busy = true;
+        }
+      })
     }
   }
 }
@@ -236,6 +285,7 @@ export default {
         }
         // 按钮居中button放在div里面
         .load-more,.scroll-more{
+          // 居中显示
           text-align:center;
         }
       }
