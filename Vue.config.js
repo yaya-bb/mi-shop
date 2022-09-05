@@ -11,6 +11,9 @@
 // lintOnSave做eslint校验，防止写多余的程序，减少性能
 // productionSourceMap:false,没有map文件并且其他人看不到我们的源码也可以加速生产环境的构建
 // devServer可以指定主机，端口，代理，为什么能在本地起作用:由node.js支持，由node.js启动服务，监听端口
+
+const { config } = require("vue/types/umd");
+
 // pwa可以生成桌面应用的插件，
 module.exports = {
   // 本地开发服务器
@@ -29,5 +32,13 @@ module.exports = {
     }
   },
   lintOnSave: false,
-  productionSourceMap: false
+  productionSourceMap: true,
+  // 链式修改webpack的配置
+  // 页面之间不进行一次性加载
+  chainWebpack: (config) => {
+    // config.plugins获取参数
+    // config.plugins.delete进行删除
+    // 删除预加载，实现真正按需
+    config.plugins.delete('prefetch')
+  }
 }

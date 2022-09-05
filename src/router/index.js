@@ -40,19 +40,24 @@ export default new Router({
           // 通过require去加载页面的组件，里面用resolve把参数抛出去
           // 这样可以实现产品站的按需加载
           // 这是一个箭头函数，当访问产品站的时候，会变相的通过箭头函数require把它加载进来
-          component: resolve => require(['@/pages/index.vue'], resolve)
+          // component: resolve => require(['@/pages/index.vue'], resolve)
+          // 这个方法需要安装插件 @babel-plugin-syntax-dynamic-important
+          component: () => import('@/pages/product.vue')
         },
         {
           path: '/detail/:id',
           name: 'detail',
-          component: resolve => require(['@/pages/detail.vue'], resolve)
+          // component: resolve => require(['@/pages/detail.vue'], resolve)
+          component: () => import('@/pages/detail.vue')
+
         }
       ]
     },
     {
       path: '/login',
       name: 'login',
-      component: resolve => require(['@/pages/login.vue'], resolve)
+      // component: resolve => require(['@/pages/login.vue'], resolve)
+      component: () => import('@/pages/login.vue')
     },
     {
       path: '/cart',
@@ -67,17 +72,17 @@ export default new Router({
         {
           path: 'list',
           name: 'order-list',
-          component: () => import('@/pages/OrderList.vue')
+          component: () => import('@/pages/orderList.vue')
         },
         {
           path: 'confirm',
           name: 'order-confirm',
-          component: () => import('@/pages/OrderConfirm.vue')
+          component: () => import('@/pages/orderConfirm.vue')
         },
         {
           path: 'pay',
           name: 'order-pay',
-          component: () => import('@/pages/OrderPay.vue')
+          component: () => import('@/pages/orderPay.vue')
         },
         {
           path: 'alipay',
