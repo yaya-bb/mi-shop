@@ -2,14 +2,13 @@
   <div class="cart">
     <order-header title="我的购物车">
       <template v-slot:tip>
-        <span class="tip">温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</span>
+        <span>温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</span>
       </template>
     </order-header>
     <div class="wrapper">
       <div class="container">
         <div class="cart-box">
           <ul class="cart-item-head">
-            <!-- 点击绑定全选事件 -->
             <li class="col-1"><span class="checkbox" v-bind:class="{'checked':allChecked}" @click="toggleAll"></span>全选</li>
             <li class="col-3">商品名称</li>
             <li class="col-1">单价</li>
@@ -20,11 +19,10 @@
           <ul class="cart-item-list">
             <li class="cart-item" v-for="(item,index) in list" v-bind:key="index">
               <div class="item-check">
-                <!-- 动态的方式绑定class，当checked为true，则添加class -->
                 <span class="checkbox" v-bind:class="{'checked':item.productSelected}"  @click="updateCart(item)"></span>
               </div>
               <div class="item-name">
-                <img v-lazy="item.productMainImage" alt="">
+                <img :src="item.productMainImage" alt="">
                 <span>{{item.productName + ' , ' + item.productSubtitle}}</span>
               </div>
               <div class="item-price">{{item.productPrice}}</div>
@@ -246,19 +244,19 @@
             }
             .item-num {
               flex:2;
-              .num-box {
+              .num-box{
                 display:inline-block;
                 width:150px;
                 height:40px;
                 line-height:40px;
                 border:1px solid #E5E5E5;
                 font-size:14px;
-                a {
+                a{
                   display:inline-block;
-                  width:50px;
+                  width:40px;
                   color:#333333;
                 }
-                span {
+                span{
                   display:inline-block;
                   width:50px;
                   color:#333333;

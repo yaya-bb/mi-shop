@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="container">
-      <a href="/#/index"><img src="https://s02.mifile.cn/assets/static/image/logo-mi2.png" alt=""></a>
+      <a href="/#/index"><img src="../../public/imgs/login-logo.png" alt=""></a>
     </div>
     <div class="wrapper">
       <div class="container">
@@ -13,11 +13,9 @@
             <input type="text" placeholder="请输入帐号" v-model="username">
           </div>
           <div class="input">
-            <!-- data写名称，使用双向绑定v-modal -->
             <input type="password" placeholder="请输入密码" v-model="password">
           </div>
           <div class="btn-box">
-            <!-- 给按钮绑定点击事件 -->
             <a href="javascript:;" class="btn" @click="login">登录</a>
           </div>
           <div class="tips">
@@ -29,12 +27,14 @@
     </div>
     <div class="footer">
       <div class="footer-link">
-        <a href="https://www.imooc.com/u/1343480" target="_blank">河畔一角主页</a><span>|</span>
-        <a href="https://coding.imooc.com/class/113.html" target="_blank">Vue全栈课程</a><span>|</span>
-        <a href="https://coding.imooc.com/class/236.html" target="_blank">React全家桶课程</a><span>|</span>
-        <a href="https://coding.imooc.com/class/343.html" target="_blank">微信支付专项课程（H5+小程序/云+Node+MongoDB）</a>
+        <a href="javascript:;">小米商城</a><span>|</span>
+        <a href="javascript:;">MIUI</a><span>|</span>
+        <a href="javascript:;">米家</a><span>|</span>
+        <a href="javascript:;">米聊</a>
       </div>
-      <p class="copyright">Copyright ©2019 mi.futurefe.com All Rights Reserved.</p>
+      <div class="copyright">
+      © mi.com 京ICP证110507号 京ICP备10046444号
+      </div>
     </div>
   </div>
 </template>

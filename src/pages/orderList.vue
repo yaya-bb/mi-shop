@@ -34,7 +34,7 @@
               <div class="good-box fl">
                 <div class="good-list" v-for="(item,i) in order.orderItemVoList" :key="i">
                   <div class="good-img">
-                    <img v-lazy="item.productImage" alt="">
+                    <img :src="item.productImage" alt="">
                   </div>
                   <div class="good-name">
                     <div class="p-name">{{item.productName}}</div>

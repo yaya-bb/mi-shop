@@ -607,6 +607,7 @@ export default {
                   cursor:pointer;
                   &:after{
                     @include bgImg(22px,22px);
+                    background-image: url('../../public/imgs/icon-cart-hover.png');
                     content:' ';
                     margin-left:5px;
                     vertical-align: middle;
